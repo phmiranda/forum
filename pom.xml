@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.alura</groupId>
-	<artifactId>forum</artifactId>
+	<artifactId>comunidade</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>forum</name>
-	<description>Forum da Alura</description>
+	<name>comunidade</name>
+	<description>API do fórum da alura que auxilio os alunos a compartilhar conhecimentos e dúvidas.</description>
 
 	<properties>
 		<java.version>1.8</java.version>
