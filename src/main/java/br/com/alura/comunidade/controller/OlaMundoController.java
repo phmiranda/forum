@@ -6,6 +6,13 @@
 
 package br.com.alura.comunidade.controller;
 
-public class OlaMundoController {
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+public class OlaMundoController {
+    @RequestMapping("/")
+    public String olaMundo(){
+        return  "Olá Mundo, vamos aprender Spring Boot ?";
+    }
 }
