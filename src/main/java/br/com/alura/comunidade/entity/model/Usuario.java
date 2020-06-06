@@ -1,4 +1,4 @@
-package br.com.alura.comunidade.entity.domain;
+package br.com.alura.comunidade.entity.model;
 
 import javax.persistence.*;
 

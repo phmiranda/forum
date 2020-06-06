@@ -6,7 +6,7 @@
 
 package br.com.alura.comunidade.repository;
 
-import br.com.alura.comunidade.entity.domain.Curso;
+import br.com.alura.comunidade.entity.model.Curso;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CursoRepository extends JpaRepository<Curso, Long> {

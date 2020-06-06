@@ -8,7 +8,7 @@ package br.com.alura.comunidade.controller;
 
 import br.com.alura.comunidade.entity.dto.TopicoForm;
 import br.com.alura.comunidade.entity.dto.TopicoDto;
-import br.com.alura.comunidade.entity.domain.Topico;
+import br.com.alura.comunidade.entity.model.Topico;
 import br.com.alura.comunidade.repository.CursoRepository;
 import br.com.alura.comunidade.repository.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

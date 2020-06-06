@@ -6,7 +6,7 @@
 
 package br.com.alura.comunidade.entity.dto;
 
-import br.com.alura.comunidade.entity.domain.Topico;
+import br.com.alura.comunidade.entity.model.Topico;
 
 import java.time.LocalDateTime;
 import java.util.List;

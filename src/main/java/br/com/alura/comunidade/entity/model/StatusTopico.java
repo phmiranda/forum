@@ -1,4 +1,4 @@
-package br.com.alura.comunidade.entity.domain;
+package br.com.alura.comunidade.entity.model;
 
 public enum StatusTopico {
 	NAO_RESPONDIDO,

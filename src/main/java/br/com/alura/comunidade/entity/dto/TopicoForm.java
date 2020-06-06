@@ -6,8 +6,8 @@
 
 package br.com.alura.comunidade.entity.dto;
 
-import br.com.alura.comunidade.entity.domain.Curso;
-import br.com.alura.comunidade.entity.domain.Topico;
+import br.com.alura.comunidade.entity.model.Curso;
+import br.com.alura.comunidade.entity.model.Topico;
 import br.com.alura.comunidade.repository.CursoRepository;
 
 public class TopicoForm {
