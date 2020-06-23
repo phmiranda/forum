@@ -38,6 +38,7 @@ public class Usuario {
 		return true;
 	}
 
+	// Getters e Setters
 	public Long getId() {
 		return id;
 	}

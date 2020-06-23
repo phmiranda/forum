@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/cursos")
-public class CursoController {
-
+public class WebController {
+    @RequestMapping("/")
+    public String olaMundo(){
+        return  "Olá Mundo, vamos aprender Spring Boot ?";
+    }
 }

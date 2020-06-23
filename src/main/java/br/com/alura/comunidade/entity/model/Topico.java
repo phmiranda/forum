@@ -28,7 +28,7 @@ public class Topico {
 	@OneToMany(mappedBy = "topico")
 	private List<Resposta> respostas = new ArrayList<>();
 
-	public Topico(){
+	public Topico() {
 
 	}
 
@@ -63,6 +63,7 @@ public class Topico {
 		return true;
 	}
 
+	// Getters e Setters
 	public Long getId() {
 		return id;
 	}

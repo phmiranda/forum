@@ -9,13 +9,34 @@ package br.com.alura.comunidade.entity.dto;
 import br.com.alura.comunidade.entity.model.Curso;
 import br.com.alura.comunidade.entity.model.Topico;
 import br.com.alura.comunidade.repository.CursoRepository;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class TopicoForm {
+    @NotNull
+    @NotEmpty
+    @Length(min = 5)
     private String titulo;
+
+    @NotNull
+    @NotEmpty
+    @Length(min = 5)
     private String mensagem;
+
+    @NotNull
+    @NotEmpty
+    @Length(min = 3)
     private String nomeCurso;
 
-    // comentário
+    // comentário.
+    public Topico converter(CursoRepository cursoRepository) {
+        Curso curso = cursoRepository.findByNome(nomeCurso);
+        return new Topico(titulo, mensagem, curso);
+    }
+
+    // Getters e Setters
     public String getTitulo() {
         return titulo;
     }
@@ -40,8 +61,5 @@ public class TopicoForm {
         this.nomeCurso = nomeCurso;
     }
 
-    public Topico converter(CursoRepository cursoRepository) {
-        Curso curso = cursoRepository.findByNome(nomeCurso);
-        return new Topico(titulo, mensagem, curso);
-    }
+
 }

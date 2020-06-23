@@ -45,6 +45,7 @@ public class Resposta {
 		return true;
 	}
 
+	// Getters e Setters
 	public Long getId() {
 		return id;
 	}

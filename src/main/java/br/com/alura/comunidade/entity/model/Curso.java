@@ -37,6 +37,7 @@ public class Curso {
 		return true;
 	}
 
+	// Getters e Setters
 	public Long getId() {
 		return id;
 	}

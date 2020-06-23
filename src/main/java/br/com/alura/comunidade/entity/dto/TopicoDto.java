@@ -30,7 +30,7 @@ public class TopicoDto {
         return topicos.stream().map(TopicoDto::new).collect(Collectors.toList());
     }
 
-    // comentário.
+    // Getters e Setters
     public Long getId() {
         return id;
     }
