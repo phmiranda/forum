@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class TopicoForm {
+public class TopicoCadastrar {
     @NotNull
     @NotEmpty
     @Length(min = 5)

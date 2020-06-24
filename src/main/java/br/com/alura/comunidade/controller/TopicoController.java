@@ -6,8 +6,9 @@
 
 package br.com.alura.comunidade.controller;
 
-import br.com.alura.comunidade.entity.dto.TopicoForm;
-import br.com.alura.comunidade.entity.dto.TopicoDto;
+import br.com.alura.comunidade.entity.dto.DetalheDoTopicoDto;
+import br.com.alura.comunidade.entity.dto.TopicoCadastrar;
+import br.com.alura.comunidade.entity.dto.TopicoIndex;
 import br.com.alura.comunidade.entity.model.Topico;
 import br.com.alura.comunidade.repository.CursoRepository;
 import br.com.alura.comunidade.repository.TopicoRepository;
@@ -30,22 +31,33 @@ public class TopicoController {
     private CursoRepository cursoRepository;
 
     @GetMapping
-    public List<TopicoDto> index(String cursoNome) {
+    public List<TopicoIndex> index(String cursoNome) {
         if (cursoNome == null){
             List<Topico> topicos = topicoRepository.findAll();
-            return TopicoDto.converter(topicos);
+            return TopicoIndex.converter(topicos);
         } else {
             List<Topico> topicos = topicoRepository.findByCursoNome(cursoNome);
-            return TopicoDto.converter(topicos);
+            return TopicoIndex.converter(topicos);
         }
     }
 
+    @GetMapping("/{id}")
+    public DetalheDoTopicoDto detalhar(@PathVariable Long id) {
+        Topico topico = topicoRepository.getOne(id);
+        return new DetalheDoTopicoDto(topico);
+    }
+
     @PostMapping()
-    public ResponseEntity<TopicoDto> cadastrar(@RequestBody @Valid TopicoForm topicoForm, UriComponentsBuilder uriBuilder){
-        Topico topico = topicoForm.converter(cursoRepository);
+    public ResponseEntity<TopicoIndex> cadastrar(@RequestBody @Valid TopicoCadastrar topicoCadastrar, UriComponentsBuilder uriBuilder){
+        Topico topico = topicoCadastrar.converter(cursoRepository);
         topicoRepository.save(topico);
         URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
-        return ResponseEntity.created(uri).body(new TopicoDto(topico));
+        return ResponseEntity.created(uri).body(new TopicoIndex(topico));
+    }
+
+    @PutMapping
+    public void atualizar() {
+
     }
 
     @DeleteMapping
