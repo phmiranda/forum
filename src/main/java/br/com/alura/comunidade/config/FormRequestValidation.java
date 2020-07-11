@@ -4,13 +4,14 @@
  * Description: this class execute...!
  * Date: 22/06/2020
  */
+
 package br.com.alura.comunidade.config;
 
-public class FormErrorDto {
+public class FormRequestValidation {
     private String attribute;
     private String error;
 
-    public FormErrorDto(String attribute, String error) {
+    public FormRequestValidation(String attribute, String error) {
         this.attribute = attribute;
         this.error = error;
     }

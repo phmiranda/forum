@@ -10,14 +10,14 @@ import br.com.alura.comunidade.entity.model.Resposta;
 
 import java.time.LocalDateTime;
 
-public class RespostaDetalhar {
+public class RespostaDtoDetalhar {
     private Long id;
     private String mensagem;
     private LocalDateTime dataCriacao;
     private String nomeAutor;
 
     // Construtor padronizado.
-    public RespostaDetalhar(Resposta resposta) {
+    public RespostaDtoDetalhar(Resposta resposta) {
         this.id = resposta.getId();
         this.mensagem = resposta.getMensagem();
         this.dataCriacao = resposta.getDataCriacao();

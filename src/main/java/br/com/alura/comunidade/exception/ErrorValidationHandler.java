@@ -6,7 +6,7 @@
  */
 package br.com.alura.comunidade.exception;
 
-import br.com.alura.comunidade.config.FormErrorDto;
+import br.com.alura.comunidade.config.FormRequestValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -27,14 +27,14 @@ public class ErrorValidationHandler {
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public List<FormErrorDto> handler(MethodArgumentNotValidException exception) {
-        List<FormErrorDto> formErrorDtos = new ArrayList<>();
+    public List<FormRequestValidation> handler(MethodArgumentNotValidException exception) {
+        List<FormRequestValidation> formRequestValidations = new ArrayList<>();
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
         fieldErrors.forEach(e -> {
             String message = messageSource.getMessage(e, LocaleContextHolder.getLocale());
-            FormErrorDto errors = new FormErrorDto(e.getField(),message);
-            formErrorDtos.add(errors);
+            FormRequestValidation errors = new FormRequestValidation(e.getField(),message);
+            formRequestValidations.add(errors);
         });
-        return formErrorDtos;
+        return formRequestValidations;
     }
 }

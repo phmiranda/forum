@@ -14,17 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DetalheDoTopicoDto {
+public class TopicoDtoDetalhar {
     private Long id;
     private String titulo;
     private String mensagem;
     private LocalDateTime dataCriacao;
     private String nomeAutor;
     private StatusTopico status;
-    private List<RespostaDetalhar> respostas;
+    private List<RespostaDtoDetalhar> respostas;
     //
 
-    public DetalheDoTopicoDto(Topico topico) {
+    public TopicoDtoDetalhar(Topico topico) {
         this.id = topico.getId();
         this.titulo = topico.getTitulo();
         this.mensagem = topico.getMensagem();
@@ -32,7 +32,7 @@ public class DetalheDoTopicoDto {
         this.nomeAutor = topico.getAutor().getNome();
         this.status = topico.getStatus();
         this.respostas = new ArrayList<>();
-        this.respostas.addAll(topico.getRespostas().stream().map(RespostaDetalhar::new).collect(Collectors.toList()));
+        this.respostas.addAll(topico.getRespostas().stream().map(RespostaDtoDetalhar::new).collect(Collectors.toList()));
     }
 
     // Getters e Setters
@@ -60,7 +60,7 @@ public class DetalheDoTopicoDto {
         return status;
     }
 
-    public List<RespostaDetalhar> getRespostas() {
+    public List<RespostaDtoDetalhar> getRespostas() {
         return respostas;
     }
 }

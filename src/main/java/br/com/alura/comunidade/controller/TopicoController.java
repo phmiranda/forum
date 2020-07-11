@@ -6,9 +6,10 @@
 
 package br.com.alura.comunidade.controller;
 
-import br.com.alura.comunidade.entity.dto.DetalheDoTopicoDto;
-import br.com.alura.comunidade.entity.dto.TopicoCadastrar;
-import br.com.alura.comunidade.entity.dto.TopicoIndex;
+import br.com.alura.comunidade.entity.dto.TopicoDtoDetalhar;
+import br.com.alura.comunidade.entity.dto.TopicoDtoForm;
+import br.com.alura.comunidade.entity.dto.TopicoDto;
+import br.com.alura.comunidade.entity.dto.TopicoDtoFormAtualizar;
 import br.com.alura.comunidade.entity.model.Topico;
 import br.com.alura.comunidade.repository.CursoRepository;
 import br.com.alura.comunidade.repository.TopicoRepository;
@@ -17,9 +18,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/topicos")
@@ -31,37 +34,53 @@ public class TopicoController {
     private CursoRepository cursoRepository;
 
     @GetMapping
-    public List<TopicoIndex> index(String cursoNome) {
+    public List<TopicoDto> index(String cursoNome) {
         if (cursoNome == null){
             List<Topico> topicos = topicoRepository.findAll();
-            return TopicoIndex.converter(topicos);
+            return TopicoDto.converter(topicos);
         } else {
             List<Topico> topicos = topicoRepository.findByCursoNome(cursoNome);
-            return TopicoIndex.converter(topicos);
+            return TopicoDto.converter(topicos);
         }
     }
 
     @GetMapping("/{id}")
-    public DetalheDoTopicoDto detalhar(@PathVariable Long id) {
-        Topico topico = topicoRepository.getOne(id);
-        return new DetalheDoTopicoDto(topico);
+    public ResponseEntity<TopicoDtoDetalhar> detalhar(@PathVariable Long id) {
+        Optional<Topico> optional = topicoRepository.findById(id);
+        if (optional.isPresent()){
+            return ResponseEntity.ok(new TopicoDtoDetalhar(optional.get()));
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping()
-    public ResponseEntity<TopicoIndex> cadastrar(@RequestBody @Valid TopicoCadastrar topicoCadastrar, UriComponentsBuilder uriBuilder){
-        Topico topico = topicoCadastrar.converter(cursoRepository);
+    @Transactional
+    public ResponseEntity<TopicoDto> cadastrar(@RequestBody @Valid TopicoDtoForm topicoDtoForm, UriComponentsBuilder uriBuilder){
+        Topico topico = topicoDtoForm.converter(cursoRepository);
         topicoRepository.save(topico);
         URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
-        return ResponseEntity.created(uri).body(new TopicoIndex(topico));
+        return ResponseEntity.created(uri).body(new TopicoDto(topico));
     }
 
-    @PutMapping
-    public void atualizar() {
-
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<TopicoDto> atualizar(@PathVariable Long id, @RequestBody @Valid TopicoDtoFormAtualizar form) {
+        Optional<Topico> optional = topicoRepository.findById(id);
+        if (optional.isPresent()){
+            Topico topico = form.atualizar(id,topicoRepository);
+            return ResponseEntity.ok(new TopicoDto(topico));
+        }
+        return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping
-    public void deletar() {
-
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> deletar(@PathVariable Long id) {
+        Optional<Topico> optional = topicoRepository.findById(id);
+        if (optional.isPresent()){
+            topicoRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.ok().build();
     }
 }
