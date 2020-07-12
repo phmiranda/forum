@@ -1,13 +1,13 @@
-package br.com.alura.forum;
+package br.com.alura.comunidade;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ForumApplication {
+public class ComunidadeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ForumApplication.class, args);
+		SpringApplication.run(ComunidadeApplication.class, args);
 	}
 
 }
