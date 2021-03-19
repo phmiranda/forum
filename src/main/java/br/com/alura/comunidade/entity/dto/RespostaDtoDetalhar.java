@@ -4,6 +4,7 @@
  * Description: this class execute...!
  * Date: 23/06/2020
  */
+
 package br.com.alura.comunidade.entity.dto;
 
 import br.com.alura.comunidade.entity.model.Resposta;
