@@ -5,11 +5,11 @@
  * Date: 05/05/2020
  */
 
-package br.com.alura.comunidade.entity.dto;
+package br.com.phmiranda.comunidade.domain.dto;
 
-import br.com.alura.comunidade.entity.model.Curso;
-import br.com.alura.comunidade.entity.model.Topico;
-import br.com.alura.comunidade.repository.CursoRepository;
+import br.com.phmiranda.comunidade.domain.model.Curso;
+import br.com.phmiranda.comunidade.domain.model.Topico;
+import br.com.phmiranda.comunidade.repository.CursoRepository;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;

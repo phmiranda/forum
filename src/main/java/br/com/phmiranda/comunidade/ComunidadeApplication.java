@@ -5,7 +5,7 @@
  * Date: 05/05/2020
  */
 
-package br.com.alura.comunidade;
+package br.com.phmiranda.comunidade;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

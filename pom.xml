@@ -10,7 +10,7 @@
 	</parent>
 
 	<name>comunidade</name>
-	<groupId>br.com.alura</groupId>
+	<groupId>br.com.phmiranda</groupId>
 	<artifactId>comunidade</artifactId>
 	<description>API da comunidade da plataforma Alura.</description>
 	<version>0.0.1-SNAPSHOT</version>

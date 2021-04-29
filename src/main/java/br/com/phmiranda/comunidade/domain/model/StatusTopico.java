@@ -5,7 +5,7 @@
  * Date: 23/12/2020
  */
 
-package br.com.alura.comunidade.entity.model;
+package br.com.phmiranda.comunidade.domain.model;
 
 public enum StatusTopico {
 	NAO_RESPONDIDO,

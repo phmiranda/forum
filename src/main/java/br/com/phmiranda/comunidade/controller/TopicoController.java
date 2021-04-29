@@ -5,15 +5,15 @@
  * Date: 05/05/2020
  */
 
-package br.com.alura.comunidade.controller;
+package br.com.phmiranda.comunidade.controller;
 
-import br.com.alura.comunidade.entity.dto.TopicoDtoDetalhar;
-import br.com.alura.comunidade.entity.dto.TopicoDtoForm;
-import br.com.alura.comunidade.entity.dto.TopicoDto;
-import br.com.alura.comunidade.entity.dto.TopicoDtoFormAtualizar;
-import br.com.alura.comunidade.entity.model.Topico;
-import br.com.alura.comunidade.repository.CursoRepository;
-import br.com.alura.comunidade.repository.TopicoRepository;
+import br.com.phmiranda.comunidade.domain.dto.TopicoDtoDetalhar;
+import br.com.phmiranda.comunidade.domain.dto.TopicoDtoForm;
+import br.com.phmiranda.comunidade.domain.dto.TopicoDto;
+import br.com.phmiranda.comunidade.domain.dto.TopicoDtoFormAtualizar;
+import br.com.phmiranda.comunidade.domain.model.Topico;
+import br.com.phmiranda.comunidade.repository.CursoRepository;
+import br.com.phmiranda.comunidade.repository.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

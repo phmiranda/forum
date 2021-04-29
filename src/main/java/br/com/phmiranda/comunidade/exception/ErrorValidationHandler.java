@@ -5,9 +5,9 @@
  * Date: 21/06/2020
  */
 
-package br.com.alura.comunidade.exception;
+package br.com.phmiranda.comunidade.exception;
 
-import br.com.alura.comunidade.config.FormRequestValidation;
+import br.com.phmiranda.comunidade.config.FormRequestValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;

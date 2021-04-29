@@ -1,4 +1,4 @@
-package br.com.alura.comunidade;
+package br.com.phmiranda.comunidade;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

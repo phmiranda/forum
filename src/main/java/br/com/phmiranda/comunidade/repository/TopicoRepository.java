@@ -5,9 +5,9 @@
  * Date: 05/05/2020
  */
 
-package br.com.alura.comunidade.repository;
+package br.com.phmiranda.comunidade.repository;
 
-import br.com.alura.comunidade.entity.model.Topico;
+import br.com.phmiranda.comunidade.domain.model.Topico;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

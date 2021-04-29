@@ -5,9 +5,9 @@
  * Date: 23/06/2020
  */
 
-package br.com.alura.comunidade.entity.dto;
+package br.com.phmiranda.comunidade.domain.dto;
 
-import br.com.alura.comunidade.entity.model.Resposta;
+import br.com.phmiranda.comunidade.domain.model.Resposta;
 
 import java.time.LocalDateTime;
 

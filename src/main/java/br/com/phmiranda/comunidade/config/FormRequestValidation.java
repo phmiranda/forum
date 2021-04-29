@@ -5,7 +5,7 @@
  * Date: 22/06/2020
  */
 
-package br.com.alura.comunidade.config;
+package br.com.phmiranda.comunidade.config;
 
 public class FormRequestValidation {
     private String attribute;
