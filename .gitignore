@@ -22,3 +22,5 @@ HELP.md
 
 # configurações do ambiente remoto.
 src/main/resources/application.properties
+src/main/resources/validation.properties
+src/main/resources/bootstrap.properties
