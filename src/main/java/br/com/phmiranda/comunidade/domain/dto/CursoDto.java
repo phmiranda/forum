@@ -9,10 +9,14 @@
 package br.com.phmiranda.comunidade.domain.dto;
 
 import br.com.phmiranda.comunidade.domain.Curso;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
+@Setter
 public class CursoDto {
     private Long id;
     private String nome;
@@ -25,21 +29,8 @@ public class CursoDto {
         this.categoria = curso.getCategoria();
     }
 
-    // GETTERS e SETTERS
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public static List<CursoDto> converterDtoParaEntidade(List<Curso> cursos) {
+    // CONVERSÃO DA ENTIDADE CURSO
+    public static List<CursoDto> converterCursoDtoParaEntidade(List<Curso> cursos) {
         return cursos.stream().map(CursoDto::new).collect(Collectors.toList());
-
     }
 }
