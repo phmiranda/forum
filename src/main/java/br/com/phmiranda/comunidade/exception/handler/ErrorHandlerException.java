@@ -5,9 +5,9 @@
  * Date: 21/06/2020
  */
 
-package br.com.phmiranda.comunidade.exception;
+package br.com.phmiranda.comunidade.exception.handler;
 
-import br.com.phmiranda.comunidade.config.FormRequestValidation;
+import br.com.phmiranda.comunidade.exception.validation.FormValidationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -22,20 +22,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestControllerAdvice
-public class ErrorValidationHandler {
+public class ErrorHandlerException {
     @Autowired
     private MessageSource messageSource;
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public List<FormRequestValidation> handler(MethodArgumentNotValidException exception) {
-        List<FormRequestValidation> formRequestValidations = new ArrayList<>();
+    public List<FormValidationDto> handle(MethodArgumentNotValidException exception) {
+        List<FormValidationDto> validations = new ArrayList<>();
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
-        fieldErrors.forEach(e -> {
-            String message = messageSource.getMessage(e, LocaleContextHolder.getLocale());
-            FormRequestValidation errors = new FormRequestValidation(e.getField(),message);
-            formRequestValidations.add(errors);
+        fieldErrors.forEach(error -> {
+            String message = messageSource.getMessage(error, LocaleContextHolder.getLocale());
+            FormValidationDto errors = new FormValidationDto(error.getField(),message);
+            validations.add(errors);
         });
-        return formRequestValidations;
+        return validations;
     }
 }

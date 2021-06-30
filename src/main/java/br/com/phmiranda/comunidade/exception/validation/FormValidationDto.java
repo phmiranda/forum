@@ -5,13 +5,13 @@
  * Date: 22/06/2020
  */
 
-package br.com.phmiranda.comunidade.config;
+package br.com.phmiranda.comunidade.exception.validation;
 
-public class FormRequestValidation {
+public class FormValidationDto {
     private String attribute;
     private String error;
 
-    public FormRequestValidation(String attribute, String error) {
+    public FormValidationDto(String attribute, String error) {
         this.attribute = attribute;
         this.error = error;
     }

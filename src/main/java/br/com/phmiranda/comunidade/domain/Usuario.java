@@ -5,10 +5,15 @@
  * Date: 23/12/2020
  */
 
-package br.com.phmiranda.comunidade.domain.model;
+package br.com.phmiranda.comunidade.domain;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
@@ -17,9 +22,11 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
+	private String documento;
 	private String email;
 	private String senha;
 
+	// VALIDAÇÕES EXTRAS
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -44,38 +51,4 @@ public class Usuario {
 			return false;
 		return true;
 	}
-
-	// Getters e Setters
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
 }
