@@ -7,18 +7,18 @@
 
 package br.com.phmiranda.comunidade.domain.dto;
 
-import br.com.phmiranda.comunidade.domain.model.Resposta;
+import br.com.phmiranda.comunidade.domain.Resposta;
 
 import java.time.LocalDateTime;
 
-public class RespostaDtoDetalhar {
+public class RespostaDto {
     private Long id;
     private String mensagem;
     private LocalDateTime dataCriacao;
     private String nomeAutor;
 
     // Construtor padronizado.
-    public RespostaDtoDetalhar(Resposta resposta) {
+    public RespostaDto(Resposta resposta) {
         this.id = resposta.getId();
         this.mensagem = resposta.getMensagem();
         this.dataCriacao = resposta.getDataCriacao();

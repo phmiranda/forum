@@ -5,11 +5,16 @@
  * Date: 23/12/2020
  */
 
-package br.com.phmiranda.comunidade.domain.model;
+package br.com.phmiranda.comunidade.domain;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "respostas")
 public class Resposta {
@@ -17,15 +22,14 @@ public class Resposta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String mensagem;
+	@ManyToOne
+	private Usuario autor;
 
 	@ManyToOne
 	private Topico topico;
-	private LocalDateTime dataCriacao = LocalDateTime.now();
-
-	@ManyToOne
-	private Usuario autor;
+	private String mensagem;
 	private Boolean solucao = false;
+	private LocalDateTime dataCriacao = LocalDateTime.now();
 
 	@Override
 	public int hashCode() {

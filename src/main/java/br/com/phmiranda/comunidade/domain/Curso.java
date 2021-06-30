@@ -5,10 +5,15 @@
  * Date: 23/12/2020
  */
 
-package br.com.phmiranda.comunidade.domain.model;
+package br.com.phmiranda.comunidade.domain;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "cursos")
 public class Curso {
@@ -42,31 +47,6 @@ public class Curso {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	// Getters e Setters
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
 	}
 
 }

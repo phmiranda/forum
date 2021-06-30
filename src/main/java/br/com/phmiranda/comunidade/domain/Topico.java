@@ -1,17 +1,24 @@
-/**
- * User: phmiranda
+/*
+ * Author: Pedro
  * Project: comunidade
- * Description: this class execute...!
+ * User Story: HU3 - CADASTRO DO RECURSO DE TÓPICOS
+ * Description: CONSTRUÇÃO DO ENDPOINT REFERENTE AO RECURSO DE TÓPICOS
  * Date: 23/12/2020
  */
 
-package br.com.phmiranda.comunidade.domain.model;
+package br.com.phmiranda.comunidade.domain;
+
+import br.com.phmiranda.comunidade.domain.enums.TopicoStatus;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "topicos")
 public class Topico {
@@ -23,8 +30,12 @@ public class Topico {
 	private String mensagem;
 	private LocalDateTime dataCriacao = LocalDateTime.now();
 
+	public Topico() {
+
+	}
+
 	@Enumerated(EnumType.STRING)
-	private StatusTopico status = StatusTopico.NAO_RESPONDIDO;
+	private TopicoStatus status = TopicoStatus.NAO_RESPONDIDO;
 
 	@ManyToOne
 	private Usuario autor;
@@ -35,16 +46,13 @@ public class Topico {
 	@OneToMany(mappedBy = "topico")
 	private List<Resposta> respostas = new ArrayList<>();
 
-	public Topico() {
-
-	}
-
 	public Topico(String titulo, String mensagem, Curso curso) {
 		this.titulo = titulo;
 		this.mensagem = mensagem;
 		this.curso = curso;
 	}
 
+	// VALIDAÇÕES EXTRAS
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -69,70 +77,4 @@ public class Topico {
 			return false;
 		return true;
 	}
-
-	// Getters e Setters
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	public String getMensagem() {
-		return mensagem;
-	}
-
-	public void setMensagem(String mensagem) {
-		this.mensagem = mensagem;
-	}
-
-	public LocalDateTime getDataCriacao() {
-		return dataCriacao;
-	}
-
-	public void setDataCriacao(LocalDateTime dataCriacao) {
-		this.dataCriacao = dataCriacao;
-	}
-
-	public StatusTopico getStatus() {
-		return status;
-	}
-
-	public void setStatus(StatusTopico status) {
-		this.status = status;
-	}
-
-	public Usuario getAutor() {
-		return autor;
-	}
-
-	public void setAutor(Usuario autor) {
-		this.autor = autor;
-	}
-
-	public Curso getCurso() {
-		return curso;
-	}
-
-	public void setCurso(Curso curso) {
-		this.curso = curso;
-	}
-
-	public List<Resposta> getRespostas() {
-		return respostas;
-	}
-
-	public void setRespostas(List<Resposta> respostas) {
-		this.respostas = respostas;
-	}
-
 }

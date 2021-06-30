@@ -5,9 +5,9 @@
  * Date: 23/12/2020
  */
 
-package br.com.phmiranda.comunidade.domain.model;
+package br.com.phmiranda.comunidade.domain.enums;
 
-public enum StatusTopico {
+public enum TopicoStatus {
 	NAO_RESPONDIDO,
 	NAO_SOLUCIONADO,
 	SOLUCIONADO,
