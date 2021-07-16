@@ -9,6 +9,7 @@
 package br.com.phmiranda.comunidade.domain.dto;
 
 import br.com.phmiranda.comunidade.domain.Topico;
+import br.com.phmiranda.comunidade.domain.Usuario;
 import br.com.phmiranda.comunidade.repository.TopicoRepository;
 import lombok.Getter;
 import lombok.Setter;

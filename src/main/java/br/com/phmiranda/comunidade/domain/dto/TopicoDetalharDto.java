@@ -23,7 +23,7 @@ public class TopicoDetalharDto {
     private String titulo;
     private String mensagem;
     private LocalDateTime dataCriacao;
-    private String autor;
+    private String usuario;
     private TopicoStatus status;
     private List<RespostaDto> respostas;
 
@@ -32,7 +32,7 @@ public class TopicoDetalharDto {
         this.titulo = topico.getTitulo();
         this.mensagem = topico.getMensagem();
         this.dataCriacao = topico.getDataCriacao();
-        this.autor = topico.getAutor().getNome();
+        this.usuario = topico.getAutor().getNome();
         this.status = topico.getStatus();
         this.respostas = new ArrayList<>();
         this.respostas.addAll(topico.getRespostas().stream().map(RespostaDto::new).collect(Collectors.toList()));
