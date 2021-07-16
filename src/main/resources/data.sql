@@ -4,9 +4,9 @@ INSERT INTO db_comunidade.cursos(id, nome, categoria) VALUES(3, 'Javascript', 'F
 INSERT INTO db_comunidade.cursos(id, nome, categoria) VALUES(4, 'Python', 'Backend');
 INSERT INTO db_comunidade.cursos(id, nome, categoria) VALUES(5, 'PHP', 'Backend');
 
-INSERT INTO db_comunidade.usuarios(id, nome, email, senha) VALUES(1, 'Administrador', 'admin@email.com.br', '123456');
-INSERT INTO db_comunidade.usuarios(id, nome, email, senha) VALUES(2, 'Débora Silva Viana', 'debora.viana@email.com.br', '123456');
-INSERT INTO db_comunidade.usuarios(id, nome, email, senha) VALUES(3, 'Alexander da Silva Vasconcelos', 'alexander.vasconcelos@email.com.br', '123456');
+INSERT INTO db_comunidade.usuarios(id, nome, email, senha) VALUES(1, 'Administrador', 'admin@email.com.br', '$2a$04$ygKK8TiwMgUA64teTjLk0eA5QBTRQX/Xym54qzoCk6dbd.dt8Y0OK');
+INSERT INTO db_comunidade.usuarios(id, nome, email, senha) VALUES(2, 'Débora Silva Viana', 'debora.viana@email.com.br', '$2a$04$ygKK8TiwMgUA64teTjLk0eA5QBTRQX/Xym54qzoCk6dbd.dt8Y0OK');
+INSERT INTO db_comunidade.usuarios(id, nome, email, senha) VALUES(3, 'Alexander da Silva Vasconcelos', 'alexander.vasconcelos@email.com.br', '$2a$04$ygKK8TiwMgUA64teTjLk0eA5QBTRQX/Xym54qzoCk6dbd.dt8Y0OK');
 
 INSERT INTO db_comunidade.topicos(id, titulo, mensagem, data_criacao, status, autor_id, curso_id) VALUES(1, 'Dúvida #01', 'MENSAGEM DA DÚVIDA', NOW(), 'NAO_RESPONDIDO', 1, 1);
 INSERT INTO db_comunidade.topicos(id, titulo, mensagem, data_criacao, status, autor_id, curso_id) VALUES(2, 'Dúvida #02', 'MENSAGEM DA DÚVIDA', NOW(), 'NAO_RESPONDIDO', 2, 2);
