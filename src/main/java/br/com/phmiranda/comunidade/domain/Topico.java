@@ -9,7 +9,9 @@
 package br.com.phmiranda.comunidade.domain;
 
 import br.com.phmiranda.comunidade.domain.enums.TopicoStatus;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -23,30 +25,42 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "topicos")
+@AllArgsConstructor
 public class Topico {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "", nullable = false)
 	private Long id;
+
+	@Column(name = "titulo", nullable = false)
 	private String titulo;
+
+	@Column(name = "mensagem", nullable = false)
 	private String mensagem;
+
+	@Column(name = "data_criacao", nullable = false)
 	private LocalDateTime dataCriacao = LocalDateTime.now();
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status", nullable = false)
+	private TopicoStatus status = TopicoStatus.NAO_RESPONDIDO;
+
+	@ManyToOne
+	@JoinColumn(name = "autor_id", nullable = false)
+	private Usuario autor;
+
+	@ManyToOne
+	@JoinColumn(name = "curso_id", nullable = false)
+	private Curso curso;
+
+	@OneToMany(mappedBy = "topico")
+	@JoinColumn(name = "responsa_id", nullable = false)
+	private List<Resposta> respostas = new ArrayList<>();
 
 	public Topico() {
 
 	}
-
-	@Enumerated(EnumType.STRING)
-	private TopicoStatus status = TopicoStatus.NAO_RESPONDIDO;
-
-	@ManyToOne
-	private Usuario autor;
-
-	@ManyToOne
-	private Curso curso;
-
-	@OneToMany(mappedBy = "topico")
-	private List<Resposta> respostas = new ArrayList<>();
 
 	public Topico(String titulo, String mensagem, Curso curso) {
 		this.titulo = titulo;

@@ -7,7 +7,9 @@
 
 package br.com.phmiranda.comunidade.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -16,12 +18,19 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "cursos")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Curso {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
 	private Long id;
+
+	@Column(name = "nome", nullable = false, length = 50)
 	private String nome;
+
+	@Column(name = "categoria", nullable = false, length = 50)
 	private String categoria;
 	
 	@Override

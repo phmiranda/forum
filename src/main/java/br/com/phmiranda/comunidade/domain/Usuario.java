@@ -8,7 +8,9 @@
 
 package br.com.phmiranda.comunidade.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,19 +24,31 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "usuarios")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
 	private Long id;
+
+	@Column(name = "nome", nullable = false)
 	private String nome;
+
+	@Column(name = "documento", nullable = false)
 	private String documento;
+
+	@Column(name = "email", nullable = false)
 	private String email;
+
+	@Column(name = "senha", nullable = false)
 	private String senha;
 
 	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "perfil_id")
 	private List<UsuarioPerfil> perfis = new ArrayList<>();
 
 	// VALIDAÇÕES EXTRAS

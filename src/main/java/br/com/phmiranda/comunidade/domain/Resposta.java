@@ -7,7 +7,9 @@
 
 package br.com.phmiranda.comunidade.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -17,18 +19,30 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "respostas")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Resposta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
 	private Long id;
+
 	@ManyToOne
+	@JoinColumn(name = "autor_id", nullable = false)
 	private Usuario autor;
 
 	@ManyToOne
+	@JoinColumn(name = "topico_id", nullable = false)
 	private Topico topico;
+
+	@Column(name = "mensagem", nullable = false)
 	private String mensagem;
+
+	@Column(name = "solucao", nullable = false)
 	private Boolean solucao = false;
+
+	@Column(name = "data_criacao", nullable = false)
 	private LocalDateTime dataCriacao = LocalDateTime.now();
 
 	@Override
@@ -55,54 +69,4 @@ public class Resposta {
 			return false;
 		return true;
 	}
-
-	// Getters e Setters
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getMensagem() {
-		return mensagem;
-	}
-
-	public void setMensagem(String mensagem) {
-		this.mensagem = mensagem;
-	}
-
-	public Topico getTopico() {
-		return topico;
-	}
-
-	public void setTopico(Topico topico) {
-		this.topico = topico;
-	}
-
-	public LocalDateTime getDataCriacao() {
-		return dataCriacao;
-	}
-
-	public void setDataCriacao(LocalDateTime dataCriacao) {
-		this.dataCriacao = dataCriacao;
-	}
-
-	public Usuario getAutor() {
-		return autor;
-	}
-
-	public void setAutor(Usuario autor) {
-		this.autor = autor;
-	}
-
-	public Boolean getSolucao() {
-		return solucao;
-	}
-
-	public void setSolucao(Boolean solucao) {
-		this.solucao = solucao;
-	}
-
 }
