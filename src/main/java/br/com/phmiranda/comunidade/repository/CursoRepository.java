@@ -1,8 +1,9 @@
-/**
- * User: phmiranda
+/*
+ * Author: Pedro
  * Project: comunidade
- * Description: this class execute...!
- * Date: 05/05/2020
+ * User Story: PGT-HU002
+ * Description: CONSTRUÇÃO DO SERVIÇO DE CADASTRO DE CURSOS.
+ * Date: 20/07/2021
  */
 
 package br.com.phmiranda.comunidade.repository;
