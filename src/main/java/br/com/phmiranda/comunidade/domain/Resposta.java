@@ -8,13 +8,22 @@
 
 package br.com.phmiranda.comunidade.domain;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+
+@Entity
+@Table(name = "respostas")
 public class Resposta {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String mensagem;
+    @ManyToOne
     private Topico topico;
     private LocalDateTime dataCriacao = LocalDateTime.now();
-    private Usuario autor;
+    @ManyToOne
+    private Usuario usuario;
     private Boolean solucao = false;
 }
