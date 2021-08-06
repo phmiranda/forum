@@ -9,9 +9,8 @@
 package br.com.phmiranda.comunidade.domain.dto;
 
 import br.com.phmiranda.comunidade.domain.Resposta;
+import org.springframework.data.domain.Page;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class RespostaDto {
     private Long id;
@@ -42,7 +41,7 @@ public class RespostaDto {
         return dataCriacao;
     }
 
-    public static List<RespostaDto> converter(List<Resposta> respostas) {
-        return respostas.stream().map(RespostaDto::new).collect(Collectors.toList());
+    public static Page<RespostaDto> converter(Page<Resposta> respostas) {
+        return respostas.map(RespostaDto::new);
     }
 }

@@ -9,6 +9,7 @@
 package br.com.phmiranda.comunidade.domain.dto;
 
 import br.com.phmiranda.comunidade.domain.Topico;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,10 +28,6 @@ public class TopicoDto {
         this.dataCriacao = topico.getDataCriacao();
     }
 
-    public static List<TopicoDto> converter(List<Topico> topicos) {
-        return topicos.stream().map(TopicoDto::new).collect(Collectors.toList());
-    }
-
     public Long getId() {
         return id;
     }
@@ -45,5 +42,9 @@ public class TopicoDto {
 
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
+    }
+
+    public static Page<TopicoDto> converter(Page<Topico> topicos) {
+        return topicos.map(TopicoDto::new);
     }
 }

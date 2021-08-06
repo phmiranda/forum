@@ -9,9 +9,7 @@
 package br.com.phmiranda.comunidade.domain.dto;
 
 import br.com.phmiranda.comunidade.domain.Curso;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.data.domain.Page;
 
 public class CursoDto {
     private Long id;
@@ -24,10 +22,6 @@ public class CursoDto {
         this.categoria = curso.getCategoria();
     }
 
-    public static List<CursoDto> converter(List<Curso> cursos) {
-        return cursos.stream().map(CursoDto::new).collect(Collectors.toList());
-    }
-
     public Long getId() {
         return id;
     }
@@ -38,5 +32,9 @@ public class CursoDto {
 
     public String getCategoria() {
         return categoria;
+    }
+
+    public static Page<CursoDto> converter(Page<Curso> cursos) {
+        return cursos.map(CursoDto::new);
     }
 }
