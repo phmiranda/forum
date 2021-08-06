@@ -9,11 +9,17 @@
 package br.com.phmiranda.comunidade.controller;
 
 import br.com.phmiranda.comunidade.domain.Curso;
+import br.com.phmiranda.comunidade.domain.Topico;
 import br.com.phmiranda.comunidade.domain.dto.CursoDetalharDto;
 import br.com.phmiranda.comunidade.domain.dto.CursoDto;
+import br.com.phmiranda.comunidade.domain.form.CursoAtualizarFormDto;
 import br.com.phmiranda.comunidade.domain.form.CursoFormDto;
 import br.com.phmiranda.comunidade.repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +27,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/cursos")
@@ -31,13 +37,13 @@ public class CursoController {
     CursoRepository cursoRepository;
 
     @GetMapping
-    public List<CursoDto> index() {
-        List<Curso> cursos = cursoRepository.findAll();
+    public Page<CursoDto> index(@PageableDefault(sort = "id", page = 0, size = 10, direction = Sort.Direction.ASC) Pageable paginacao) {
+        Page<Curso> cursos = cursoRepository.findAll(paginacao);
         return CursoDto.converter(cursos);
     }
 
-    @PostMapping
     @Transactional
+    @PostMapping
     public ResponseEntity<CursoDto> cadastrar(@RequestBody @Valid CursoFormDto cursoFormDto, UriComponentsBuilder uriComponentsBuilder) {
         Curso curso = cursoFormDto.converter();
         cursoRepository.save(curso);
@@ -45,9 +51,44 @@ public class CursoController {
         return ResponseEntity.created(uri).body(new CursoDto(curso));
     }
 
+    @Transactional
+    @DeleteMapping("/{id}")
+    public  ResponseEntity<?> deletar(@PathVariable Long id) {
+        Optional<Curso> optionalCurso = cursoRepository.findById(id);
+        if (optionalCurso.isPresent()) {
+            cursoRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @Transactional
+    @PutMapping("/{id}")
+    public ResponseEntity<CursoDto> atualizar(@PathVariable Long id, @RequestBody CursoAtualizarFormDto cursoAtualizarFormDto) {
+        Optional<Curso> optionalCurso = cursoRepository.findById(id);
+        if (optionalCurso.isPresent()) {
+            Curso curso = cursoAtualizarFormDto.atualizarRecurso(id, cursoRepository);
+            return ResponseEntity.ok(new CursoDto(curso));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @GetMapping("/{id}")
-    public CursoDetalharDto detalhar(@PathVariable Long id) {
-        Curso curso = cursoRepository.getOne(id);
-        return new CursoDetalharDto(curso);
+    public ResponseEntity<CursoDetalharDto> pesquisarPorId(@PathVariable Long id) {
+        Optional<Curso> optionalCurso = cursoRepository.findById(id);
+        if (optionalCurso.isPresent()) {
+            return ResponseEntity.ok(new CursoDetalharDto(optionalCurso.get()));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/nome")
+    public void pesquisarPorNome() {
+
+    }
+
+    @GetMapping("/categoria")
+    public void pesquisarPorCategoria() {
+
     }
 }
