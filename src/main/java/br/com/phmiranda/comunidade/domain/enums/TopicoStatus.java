@@ -1,8 +1,9 @@
-/**
- * User: phmiranda
+/*
+ * Author: Pedro
  * Project: comunidade
- * Description: this class execute...!
- * Date: 23/12/2020
+ * User Story: HUXXX - TITLE OF USER HISTORY
+ * Description: DESCRIPTION OF USER HISTORY
+ * Date: 20/07/2021
  */
 
 package br.com.phmiranda.comunidade.domain.enums;
