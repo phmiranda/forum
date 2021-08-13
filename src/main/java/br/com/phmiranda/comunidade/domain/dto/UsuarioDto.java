@@ -3,27 +3,23 @@
  * Project: comunidade
  * User Story: HUXXX - TITLE OF USER HISTORY
  * Description: DESCRIPTION OF USER HISTORY
- * Date: 28/06/2021
+ * Date: 04/08/2021
  */
 
 package br.com.phmiranda.comunidade.domain.dto;
 
 import br.com.phmiranda.comunidade.domain.Usuario;
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
-@Setter
 public class UsuarioDto {
     private Long id;
     private String nome;
     private String documento;
     private String email;
 
-    // MÉTODO CONSTRUTOR
     public UsuarioDto(Usuario usuario) {
         this.id = usuario.getId();
         this.nome = usuario.getNome();
@@ -31,8 +27,23 @@ public class UsuarioDto {
         this.email = usuario.getEmail();
     }
 
-    // CONVERSÃO DA ENTIDADE USUÁRIO
-    public static List<UsuarioDto> converterUsuarioDtoParaEntidade(List<Usuario> usuarios) {
-        return usuarios.stream().map(UsuarioDto::new).collect(Collectors.toList());
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public static Page<UsuarioDto> converter(Page<Usuario> usuarios) {
+        return usuarios.map(UsuarioDto::new);
     }
 }
