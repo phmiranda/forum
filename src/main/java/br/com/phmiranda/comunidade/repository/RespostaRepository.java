@@ -1,10 +1,11 @@
 /*
  * Author: Pedro
  * Project: comunidade
- * User Story: HUXXX - TITLE OF USER HISTORY
- * Description: DESCRIPTION OF USER HISTORY
- * Date: 28/06/2021
+ * User Story: PGT-HU004
+ * Description: CONSTRUÇÃO DO SERVIÇO DE CADASTRO DE RESPOSTAS.
+ * Date: 20/07/2021
  */
+
 package br.com.phmiranda.comunidade.repository;
 
 import br.com.phmiranda.comunidade.domain.Resposta;

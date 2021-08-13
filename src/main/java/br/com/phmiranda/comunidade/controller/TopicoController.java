@@ -1,21 +1,21 @@
 /*
  * Author: Pedro
  * Project: comunidade
- * User Story: HU3 - CADASTRO DO RECURSO DE TÓPICOS
- * Description: CONSTRUÇÃO DO ENDPOINT REFERENTE AO RECURSO DE TÓPICOS
- * Date: 05/05/2020
+ * User Story: PGT-HU003
+ * Description: CONSTRUÇÃO DO SERVIÇO DE CADASTRO DE TÓPICOS.
+ * Date: 20/07/2021
  */
 
 package br.com.phmiranda.comunidade.controller;
 
-import br.com.phmiranda.comunidade.domain.dto.TopicoAtualizarDto;
-import br.com.phmiranda.comunidade.domain.dto.TopicoCadastrarDto;
+import br.com.phmiranda.comunidade.domain.Topico;
 import br.com.phmiranda.comunidade.domain.dto.TopicoDetalharDto;
 import br.com.phmiranda.comunidade.domain.dto.TopicoDto;
-import br.com.phmiranda.comunidade.service.TopicoService;
+import br.com.phmiranda.comunidade.domain.form.TopicoAtualizarFormDto;
+import br.com.phmiranda.comunidade.domain.form.TopicoFormDto;
+import br.com.phmiranda.comunidade.repository.CursoRepository;
+import br.com.phmiranda.comunidade.repository.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -25,48 +25,68 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
+import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/topicos")
 public class TopicoController {
+
     @Autowired
-    private TopicoService topicoService;
+    TopicoRepository topicoRepository;
+
+    @Autowired
+    CursoRepository cursoRepository;
 
     @GetMapping
-    @Cacheable(value = "topicos-lista")
-    public Page<TopicoDto> index(@PageableDefault(page = 0, size = 10, sort = "id",direction = Sort.Direction.DESC) Pageable paginacao) {
-        return topicoService.index(paginacao);
+    public Page<TopicoDto> index(@PageableDefault(sort = "id", page = 0, size = 10, direction = Sort.Direction.ASC) Pageable paginacao) {
+        Page<Topico> topicos = topicoRepository.findAll(paginacao);
+        return TopicoDto.converter(topicos);
     }
 
+    @Transactional
     @PostMapping
-    @Transactional
-    @CacheEvict(value = "topicos-lista", allEntries = true)
-    public ResponseEntity<TopicoDto> cadastrarTopico(@RequestBody @Valid TopicoCadastrarDto topicoCadastrarDto, UriComponentsBuilder uriComponentsBuilder) {
-        ResponseEntity<TopicoDto> topicoDtoResponseEntity = topicoService.salvarTopico(topicoCadastrarDto, uriComponentsBuilder);
-        return topicoDtoResponseEntity;
+    public ResponseEntity<TopicoDto> cadastrar(@RequestBody @Valid TopicoFormDto topicoFormDto, UriComponentsBuilder uriComponentsBuilder) {
+        Topico topico = topicoFormDto.converter(cursoRepository);
+        topicoRepository.save(topico);
+        URI uri = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
+        return ResponseEntity.created(uri).body(new TopicoDto(topico));
     }
 
-    @PutMapping("/{id}")
     @Transactional
-    @CacheEvict(value = "topicos-lista", allEntries = true)
-    public ResponseEntity<TopicoDto> atualizarTopico(@PathVariable Long id, @RequestBody @Valid TopicoAtualizarDto topicoAtualizarDto) {
-        return topicoService.atualizarInformacaoTopico(id, topicoAtualizarDto);
-    }
-
     @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletar(@PathVariable Long id) {
+        Optional<Topico> optionalTopico = topicoRepository.findById(id);
+        if (optionalTopico.isPresent()) {
+            topicoRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @Transactional
-    @CacheEvict(value = "topicos-lista", allEntries = true)
-    public ResponseEntity deletarTopico(@PathVariable Long id) {
-        return topicoService.excluirTopico(id);
+    @PutMapping("/{id}")
+    public ResponseEntity<TopicoDto> atualizar(@PathVariable Long id, @RequestBody TopicoAtualizarFormDto topicoAtualizarFormDto) {
+        Optional<Topico> optionalTopico = topicoRepository.findById(id);
+        if (optionalTopico.isPresent()){
+            Topico topico = topicoAtualizarFormDto.atualizar(id, topicoRepository);
+            return ResponseEntity.ok(new TopicoDto(topico));
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TopicoDetalharDto> detalharTopico(@PathVariable Long id) {
-        return topicoService.detalharInformacaoTopico(id);
+    public ResponseEntity<TopicoDetalharDto> pesquisarPorId(@PathVariable Long id) {
+        Optional<Topico> optionalTopico = topicoRepository.findById(id);
+        if (optionalTopico.isPresent()) {
+            return ResponseEntity.ok(new TopicoDetalharDto(optionalTopico.get()));
+        }
+        return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/nome-do-curso")
-    public Page<TopicoDto> pesquisarTopicoPorCurso(@RequestParam String nomeCurso,@PageableDefault(page = 0, size = 10) Pageable paginacao) {
-        return topicoService.findByCursoNome(nomeCurso, paginacao);
+    @GetMapping("/categoria")
+    public Page<TopicoDto> pesquisarPorNomeDoCurso(@RequestParam(required = true) String nomeCurso, @PageableDefault(sort = "id", page = 0, size = 10, direction = Sort.Direction.ASC) Pageable paginacao) {
+        Page<Topico> topicos = topicoRepository.findByCursoNome(nomeCurso, paginacao);
+        return TopicoDto.converter(topicos);
     }
 }
