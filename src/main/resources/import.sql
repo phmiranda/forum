@@ -6,8 +6,9 @@ INSERT INTO cursos(id, nome, categoria) VALUES(1, 'HTML/CSS', 'FRONTEND');
 INSERT INTO cursos(id, nome, categoria) VALUES(2, 'Javascript', 'FRONTEND');
 INSERT INTO cursos(id, nome, categoria) VALUES(3, 'Java SE', 'BACKEND');
 INSERT INTO cursos(id, nome, categoria) VALUES(4, 'Java EE', 'BACKEND');
-INSERT INTO cursos(id, nome, categoria) VALUES(5, 'Python', 'BACKEND');
-INSERT INTO cursos(id, nome, categoria) VALUES(6, 'PHP', 'BACKEND');
+INSERT INTO cursos(id, nome, categoria) VALUES(5, 'Node JS', 'BACKEND');
+INSERT INTO cursos(id, nome, categoria) VALUES(6, 'Python', 'BACKEND');
+INSERT INTO cursos(id, nome, categoria) VALUES(7, 'PHP', 'BACKEND');
 
 INSERT INTO topicos(id, titulo, mensagem, data_criacao, topico_status, usuario_id, curso_id) VALUES(1, 'Dúvida #01', 'MENSAGEM DA DÚVIDA', NOW(), 'NAO_RESPONDIDO', 1, 1);
 INSERT INTO topicos(id, titulo, mensagem, data_criacao, topico_status, usuario_id, curso_id) VALUES(2, 'Dúvida #02', 'MENSAGEM DA DÚVIDA', NOW(), 'NAO_RESPONDIDO', 2, 2);

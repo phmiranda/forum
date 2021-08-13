@@ -27,6 +27,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -83,12 +84,12 @@ public class CursoController {
     }
 
     @GetMapping("/nome")
-    public void pesquisarPorNome() {
-
+    public Page<CursoDto> pesquisarPorNome(@RequestParam String nome) {
+        return null;
     }
 
     @GetMapping("/categoria")
-    public void pesquisarPorCategoria() {
-
+    public Page<CursoDto> pesquisarPorCategoria(@RequestParam String categoria) {
+        return null;
     }
 }

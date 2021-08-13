@@ -13,7 +13,7 @@
 	<groupId>br.com.phmiranda</groupId>
 	<artifactId>comunidade</artifactId>
 	<description>API da comunidade da plataforma Alura.</description>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 
 	<properties>
 		<java.version>1.8</java.version>

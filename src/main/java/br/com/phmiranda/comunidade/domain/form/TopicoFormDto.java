@@ -12,6 +12,8 @@ import br.com.phmiranda.comunidade.domain.Curso;
 import br.com.phmiranda.comunidade.domain.Topico;
 import br.com.phmiranda.comunidade.repository.CursoRepository;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.data.domain.Pageable;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
