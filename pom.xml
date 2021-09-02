@@ -13,11 +13,16 @@
 	<groupId>br.com.phmiranda</groupId>
 	<artifactId>comunidade</artifactId>
 	<description>API da comunidade da plataforma Alura.</description>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 
 	<properties>
 		<java.version>1.8</java.version>
 		<project.build.sourceEnconding>UTF-8</project.build.sourceEnconding>
+		<docker.image.dir>Dockerfile</docker.image.dir>
+		<docker.image.name>${project.artifactId}</docker.image.name>
+		<docker.image.url>phmiranda</docker.image.url>
+		<docker.image.tag.version>${project.version}</docker.image.tag.version>
+		<docker.container.build.name>${project.build.finalName}</docker.container.build.name>
 	</properties>
 
 	<dependencies>
@@ -82,6 +87,13 @@
 			<version>0.9.1</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.spotify/dockerfile-maven-plugin -->
+		<dependency>
+			<groupId>com.spotify</groupId>
+			<artifactId>dockerfile-maven-plugin</artifactId>
+			<version>1.4.13</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -95,6 +107,31 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.13</version>
+				<executions>
+					<execution>
+						<id>default</id>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
+					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+					<dockerfile>Dockerfile</dockerfile>
+					<repository>phmiranda/comunidade</repository>
+					<tag>${project.version}</tag>
+					<buildArgs>
+						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
