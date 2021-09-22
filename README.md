@@ -1,4 +1,3 @@
-# API da Plataforma da Comunidade
+# API da Plataforma da Comunidade Alura (Dúvidas)
 
-Autor: Pedro Henrique França Marques Miranda
-Descrição: API de administração da comunidade desenvolvida utilizando o Spring Boot.
+> API de administração da dúvidas publicadas na comunidade de alunos da plataforma da Alura, este projeto foi desenvolvido utilizando o Spring Boot na versão **_2.1.4.RELEASE_**.
