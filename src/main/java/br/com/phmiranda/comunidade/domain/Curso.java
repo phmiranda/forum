@@ -1,7 +1,7 @@
 /*
- * Author: Pedro
+ * Author: phmiranda
  * Project: comunidade
- * User Story: PGT-HU002
+ * User Story: SGD-8
  * Description: CONSTRUÇÃO DO SERVIÇO DE CADASTRO DE CURSOS.
  * Date: 20/07/2021
  */

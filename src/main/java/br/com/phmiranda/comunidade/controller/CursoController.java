@@ -83,12 +83,12 @@ public class CursoController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/nome")
+    @GetMapping("/filtro/nome/{nome}")
     public Page<CursoDto> pesquisarPorNome(@RequestParam String nome) {
         return null;
     }
 
-    @GetMapping("/categoria")
+    @GetMapping("/filtro/categoria{categoria}")
     public Page<CursoDto> pesquisarPorCategoria(@RequestParam String categoria) {
         return null;
     }

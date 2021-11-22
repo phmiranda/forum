@@ -24,14 +24,19 @@ public class Topico {
     private Long id;
     private String titulo;
     private String mensagem;
+
     @Enumerated(EnumType.STRING)
     private TopicoStatus topicoStatus = TopicoStatus.NAO_RESPONDIDO;
+
     @ManyToOne
     private Usuario usuario;
+
     @ManyToOne
     private Curso curso;
+
     @OneToMany(mappedBy = "topico", cascade={ CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE })
     private List<Resposta> respostas = new ArrayList<>();
+
     private LocalDateTime dataCriacao = LocalDateTime.now();
 
     public Topico() {

@@ -19,13 +19,15 @@ public class Resposta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    private Usuario usuario;
-    @ManyToOne
-    private Topico topico;
     private String mensagem;
     private Boolean solucao = Boolean.FALSE;
     private LocalDateTime dataCriacao = LocalDateTime.now();
+
+    @ManyToOne
+    private Usuario usuario;
+
+    @ManyToOne
+    private Topico topico;
 
     @Override
     public int hashCode() {

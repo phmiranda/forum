@@ -21,6 +21,6 @@ public class OlaMundoController {
     @GetMapping
     public ResponseEntity<?> olaMundo(@PathParam("nome") String nome) {
         System.out.println("OLÁ " + nome + ",BEM VINDO AO CURSO DE SPRING BOOT !");
-        return null;
+        return ResponseEntity.ok().build();
     }
 }
