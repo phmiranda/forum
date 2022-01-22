@@ -8,42 +8,12 @@
 
 package br.com.phmiranda.comunidade.domain.dto;
 
-import br.com.phmiranda.comunidade.domain.Usuario;
-import org.springframework.data.domain.Page;
+import lombok.Data;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+@Data
 public class UsuarioDto {
     private Long id;
     private String nome;
     private String documento;
     private String email;
-
-    public UsuarioDto(Usuario usuario) {
-        this.id = usuario.getId();
-        this.nome = usuario.getNome();
-        this.documento = usuario.getDocumento();
-        this.email = usuario.getEmail();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getDocumento() {
-        return documento;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public static Page<UsuarioDto> converter(Page<Usuario> usuarios) {
-        return usuarios.map(UsuarioDto::new);
-    }
 }

@@ -1,144 +1,39 @@
 /*
- * Author: Pedro
+ * Author: phmiranda
  * Project: comunidade
- * User Story: PGT-HU001
- * Description: CONSTRUÇÃO DO SERVIÇO DE CADASTRO DE USUÁRIOS.
- * Date: 05/05/2020
+ * Task Number: SRC-3
+ * Description: ALURA - SPRING BOOT API REST: CONSTRUA UMA API
+ * Date: 20/07/2022
  */
 
 package br.com.phmiranda.comunidade.domain;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
-@Entity
-@Table(name = "usuarios")
-public class Usuario implements UserDetails {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity(name = "usuarios")
+public class Usuario  {
 
     @Id
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "nome", nullable = false, length = 250)
     private String nome;
-    private String documento;
+
+    @Column(name = "numero_documento", nullable = false, length = 11)
+    private String numeroDocumento;
+
+    @Column(name = "email", nullable = false, length = 150)
     private String email;
+
+    @Column(name = "senha", nullable = false, length = 250)
     private String senha;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Perfil> perfis = new ArrayList<>();
-
-    public Usuario() {
-
-    }
-
-    public Usuario(String nome, String documento, String email, String senha) {
-        this.nome = nome;
-        this.documento = documento;
-        this.email = email;
-        this.senha = senha;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Usuario other = (Usuario) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(String documento) {
-        this.documento = documento;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.senha;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

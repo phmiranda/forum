@@ -9,132 +9,48 @@
 package br.com.phmiranda.comunidade.domain;
 
 import br.com.phmiranda.comunidade.domain.enums.TopicoStatus;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "topicos")
 public class Topico {
 
     @Id
+    @Column(name = "id", nullable = false, length = 100)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String titulo;
-    private String mensagem;
 
-    @Enumerated(EnumType.STRING)
-    private TopicoStatus topicoStatus = TopicoStatus.NAO_RESPONDIDO;
+    @Column(name = "titulo", nullable = false, length = 100)
+    private String titulo;
+
+    @Column(name = "descricao_duvida", nullable = false, columnDefinition = "TEXT")
+    private String descricaoDuvida;
 
     @ManyToOne
+    @Column(name = "usuario_id", nullable = true)
     private Usuario usuario;
 
     @ManyToOne
+    @JoinColumn(name = "curso_id", nullable = true)
     private Curso curso;
 
-    @OneToMany(mappedBy = "topico", cascade={ CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE })
+    @OneToMany
+    @JoinColumn(name = "resposta_id", nullable = true)
     private List<Resposta> respostas = new ArrayList<>();
 
+    @Column(name = "data_criacao", nullable = false)
     private LocalDateTime dataCriacao = LocalDateTime.now();
 
-    public Topico() {
-
-    }
-
-    public Topico(String titulo, String mensagem, Curso curso) {
-        this.titulo = titulo;
-        this.mensagem = mensagem;
-        this.curso = curso;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Topico other = (Topico) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getMensagem() {
-        return mensagem;
-    }
-
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
-    }
-
-    public TopicoStatus getTopicoStatus() {
-        return topicoStatus;
-    }
-
-    public void setTopicoStatus(TopicoStatus topicoStatus) {
-        this.topicoStatus = topicoStatus;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Curso getCurso() {
-        return curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
-
-    public List<Resposta> getRespostas() {
-        return respostas;
-    }
-
-    public void setRespostas(List<Resposta> respostas) {
-        this.respostas = respostas;
-    }
-
-    public LocalDateTime getDataCriacao() {
-        return dataCriacao;
-    }
-
-    public void setDataCriacao(LocalDateTime dataCriacao) {
-        this.dataCriacao = dataCriacao;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "situacao", nullable = false, length = 25)
+    private TopicoStatus topicoStatus = TopicoStatus.NAO_RESPONDIDO;
 }

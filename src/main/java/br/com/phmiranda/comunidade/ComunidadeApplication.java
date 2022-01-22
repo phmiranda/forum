@@ -1,9 +1,9 @@
 /*
- * Author: Pedro
+ * Author: phmiranda
  * Project: comunidade
- * User Story: PGT-HU001
- * Description: CONSTRUÇÃO DO SERVIÇO DE CADASTRO DE USUÁRIOS.
- * Date: 20/07/2021
+ * Task Number: SRC-3
+ * Description: ALURA - SPRING BOOT API REST: CONSTRUA UMA API
+ * Date: 20/07/2022
  */
 
 package br.com.phmiranda.comunidade;
