@@ -1,23 +1,17 @@
 /*
- * Author: phmiranda
+ * Author: Pedro
  * Project: comunidade
- * Task Number: SRC-3
- * Description: ALURA - SPRING BOOT API REST: CONSTRUA UMA API
- * Date: 20/07/2022
+ * User Story: SRC-3
+ * Description: CONSTRUÇÃO DO SERVIÇO DE CADASTRO E GERENCIAMENTO DE USUÁRIOS.
+ * Date: 20/07/2021
  */
 
 package br.com.phmiranda.comunidade.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity(name = "usuarios")
+@Entity
+@Table(name = "usuarios")
 public class Usuario  {
 
     @Id
@@ -28,8 +22,8 @@ public class Usuario  {
     @Column(name = "nome", nullable = false, length = 250)
     private String nome;
 
-    @Column(name = "numero_documento", nullable = false, length = 11)
-    private String numeroDocumento;
+    @Column(name = "documento", nullable = false, length = 11)
+    private String documento;
 
     @Column(name = "email", nullable = false, length = 150)
     private String email;

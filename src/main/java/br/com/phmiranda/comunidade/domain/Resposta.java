@@ -1,24 +1,18 @@
 /*
  * Author: Pedro
  * Project: comunidade
- * User Story: PGT-HU004
- * Description: CONSTRUÇÃO DO SERVIÇO DE CADASTRO DE RESPOSTAS.
+ * User Story: SRC-3
+ * Description: CONSTRUÇÃO DO SERVIÇO DE CADASTRO E GERENCIAMENTO DE RESPOSTAS.
  * Date: 20/07/2021
  */
 
 package br.com.phmiranda.comunidade.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity(name = "respostas")
+@Entity
+@Table(name = "respostas")
 public class Resposta {
 
     @Id

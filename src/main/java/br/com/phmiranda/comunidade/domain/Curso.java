@@ -1,23 +1,17 @@
 /*
- * Author: phmiranda
+ * Author: Pedro
  * Project: comunidade
- * User Story: SGD-8
- * Description: CONSTRUÇÃO DO SERVIÇO DE CADASTRO DE CURSOS.
+ * User Story: SRC-3
+ * Description: CONSTRUÇÃO DO SERVIÇO DE CADASTRO E GERENCIAMENTO DE CURSOS.
  * Date: 20/07/2021
  */
 
 package br.com.phmiranda.comunidade.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity(name = "cursos")
+@Entity
+@Table(name = "cursos")
 public class Curso {
 
     @Id
