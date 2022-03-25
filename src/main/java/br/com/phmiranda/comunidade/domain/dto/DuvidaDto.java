@@ -10,7 +10,7 @@ package br.com.phmiranda.comunidade.domain.dto;
 
 import java.time.LocalDateTime;
 
-public class TopicoDto {
+public class DuvidaDto {
     private Long id;
     private String titulo;
     private String descricaoDuvida;

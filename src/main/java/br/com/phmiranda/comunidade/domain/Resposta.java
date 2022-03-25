@@ -32,7 +32,7 @@ public class Resposta {
 
     @ManyToOne
     @JoinColumn(name = "topico_id", nullable = false)
-    private Topico topico;
+    private Duvida duvida;
 
     @Column(name = "situacao", nullable = false, length = 100)
     private Boolean situacao = Boolean.FALSE;

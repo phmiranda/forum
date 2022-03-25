@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "topicos")
-public class Topico {
+@Table(name = "duvidas")
+public class Duvida {
 
     @Id
     @Column(name = "id", nullable = false, length = 100)
