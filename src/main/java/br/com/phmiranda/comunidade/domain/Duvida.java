@@ -27,15 +27,15 @@ public class Duvida {
     @Column(name = "titulo", nullable = false, length = 100)
     private String titulo;
 
-    @Column(name = "descricao_duvida", nullable = false, columnDefinition = "TEXT")
-    private String descricaoDuvida;
+    @Column(name = "descricao", nullable = false, columnDefinition = "TEXT")
+    private String descricao;
 
     @ManyToOne
     @JoinColumn(name = "curso_id", nullable = true)
     private Curso curso;
 
     @ManyToOne
-    @Column(name = "usuario_id", nullable = true)
+    @JoinColumn(name = "usuario_id", nullable = true)
     private Usuario usuario;
 
     @OneToMany

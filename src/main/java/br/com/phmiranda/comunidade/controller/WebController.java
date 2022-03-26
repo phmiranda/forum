@@ -1,0 +1,23 @@
+/*
+ * Author: phmiranda
+ * Project: comunidade
+ * Task Number: HU-XXX
+ * Description: N/A
+ * Date: 26/03/2022
+ */
+
+package br.com.phmiranda.comunidade.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/olamundo")
+public class WebController {
+
+    @GetMapping
+    public void olaMundo(String nome) {
+        System.out.println("BEM VINDO AO CURSO DE SPRING BOOT: " + nome);
+    }
+}

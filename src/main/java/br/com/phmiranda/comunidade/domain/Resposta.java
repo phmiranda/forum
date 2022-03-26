@@ -16,12 +16,12 @@ import java.time.LocalDateTime;
 public class Resposta {
 
     @Id
-    @Column(name = "", nullable = false, length = 100)
+    @Column(name = "id", nullable = false, length = 100)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "descricao_solucao", nullable = false, length = 100)
-    private String descricaoSolucao;
+    @Column(name = "descricao", nullable = false, columnDefinition = "TEXT")
+    private String descricao;
 
     @Column(name = "data_criacao", nullable = false, length = 100)
     private LocalDateTime dataCriacao = LocalDateTime.now();
