@@ -6,8 +6,8 @@
  * Date: 04/08/2021
  */
 
-package br.com.phmiranda.comunidade.domain.dto;
+package br.com.phmiranda.comunidade.domain.dto.response;
 
-public class RespostaDto {
+public class RespostaResponseDto {
     private Long id;
 }

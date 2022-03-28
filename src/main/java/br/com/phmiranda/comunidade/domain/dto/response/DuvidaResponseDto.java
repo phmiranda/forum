@@ -6,13 +6,13 @@
  * Date: 04/08/2021
  */
 
-package br.com.phmiranda.comunidade.domain.dto;
+package br.com.phmiranda.comunidade.domain.dto.response;
 
 import java.time.LocalDateTime;
 
-public class DuvidaDto {
+public class DuvidaResponseDto {
     private Long id;
     private String titulo;
-    private String descricaoDuvida;
+    private String descricao;
     private LocalDateTime dataCriacao;
 }
