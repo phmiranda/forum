@@ -25,15 +25,6 @@ public class Curso {
     @Column(name = "categoria", nullable = false, length = 100)
     private String categoria;
 
-    public Curso() {
-
-    }
-
-    public Curso(String nome, String categoria) {
-        this.nome = nome;
-        this.categoria = categoria;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
