@@ -49,12 +49,6 @@ public class Duvida {
     @Column(name = "data_criacao", nullable = false)
     private LocalDateTime dataCriacao = LocalDateTime.now();
 
-    public Duvida(String titulo, String descricao, Curso curso) {
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.curso = curso;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
