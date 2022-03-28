@@ -8,7 +8,7 @@
 
 package br.com.phmiranda.comunidade.domain.enums;
 
-public enum TopicoStatus {
+public enum DuvidaStatus {
 	NAO_RESPONDIDO,
 	NAO_SOLUCIONADO,
 	SOLUCIONADO,
