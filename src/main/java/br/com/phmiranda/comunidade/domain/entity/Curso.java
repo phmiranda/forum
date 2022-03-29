@@ -1,35 +1,29 @@
 /*
  * Author: Pedro
  * Project: comunidade
- * User Story: SRC-3
- * Description: CONSTRUÇÃO DO SERVIÇO DE CADASTRO E GERENCIAMENTO DE USUÁRIOS.
+ * User Story: 72
+ * Description: Publicando Endpoints
  * Date: 20/07/2021
  */
 
-package br.com.phmiranda.comunidade.domain;
+package br.com.phmiranda.comunidade.domain.entity;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "usuarios")
-public class Usuario  {
+@Table(name = "cursos")
+public class Curso {
 
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome", nullable = false, length = 250)
+    @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
-    @Column(name = "documento", nullable = false, length = 11)
-    private String documento;
-
-    @Column(name = "email", nullable = false, length = 150)
-    private String email;
-
-    @Column(name = "senha", nullable = false, length = 250)
-    private String senha;
+    @Column(name = "categoria", nullable = false, length = 100)
+    private String categoria;
 
     @Override
     public int hashCode() {
@@ -47,7 +41,7 @@ public class Usuario  {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Usuario other = (Usuario) obj;
+        Curso other = (Curso) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -72,27 +66,11 @@ public class Usuario  {
         this.nome = nome;
     }
 
-    public String getDocumento() {
-        return documento;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setDocumento(String documento) {
-        this.documento = documento;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

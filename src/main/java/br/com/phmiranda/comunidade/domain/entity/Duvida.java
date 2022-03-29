@@ -1,12 +1,12 @@
 /*
  * Author: Pedro
  * Project: comunidade
- * User Story: SRC-3
- * Description: CONSTRUÇÃO DO SERVIÇO DE CADASTRO E GERENCIAMENTO DE TÓPICOS.
+ * User Story: 72
+ * Description: Publicando Endpoints
  * Date: 20/07/2021
  */
 
-package br.com.phmiranda.comunidade.domain;
+package br.com.phmiranda.comunidade.domain.entity;
 
 import br.com.phmiranda.comunidade.domain.enums.DuvidaStatus;
 
