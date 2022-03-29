@@ -8,11 +8,42 @@
 
 package br.com.phmiranda.comunidade.domain.dto.response;
 
+import br.com.phmiranda.comunidade.domain.entity.Duvida;
+
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class DuvidaResponseDto {
     private Long id;
     private String titulo;
     private String descricao;
     private LocalDateTime dataCriacao;
+
+    public DuvidaResponseDto(Duvida duvida) {
+        this.id = duvida.getId();
+        this.titulo = duvida.getTitulo();
+        this.descricao = duvida.getDescricao();
+        this.dataCriacao = duvida.getDataCriacao();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public static List<DuvidaResponseDto> converter(List<Duvida> duvidas) {
+        return duvidas.stream().map(DuvidaResponseDto::new).collect(Collectors.toList());
+    }
 }

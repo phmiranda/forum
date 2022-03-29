@@ -1,9 +1,9 @@
 /*
  * Author: phmiranda
  * Project: comunidade
- * Task Number: SRC-3
- * Description: ALURA - SPRING BOOT API REST: CONSTRUA UMA API
- * Date: 20/07/2022
+ * Task Number: 71
+ * Description: Introdução ao Spring Boot
+ * Date: 26/03/2022
  */
 
 package br.com.phmiranda.comunidade;

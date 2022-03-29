@@ -8,7 +8,7 @@
 
 package br.com.phmiranda.comunidade.domain.dto.response;
 
-import br.com.phmiranda.comunidade.domain.Curso;
+import br.com.phmiranda.comunidade.domain.entity.Curso;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,31 +24,19 @@ public class CursoResponseDto {
         this.categoria = curso.getCategoria();
     }
 
-    public static List<CursoResponseDto> converter(List<Curso> cursos) {
-        return cursos.stream().map(CursoResponseDto::new).collect(Collectors.toList());
-    }
-
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public static List<CursoResponseDto> converter(List<Curso> cursos) {
+        return cursos.stream().map(CursoResponseDto::new).collect(Collectors.toList());
     }
 }

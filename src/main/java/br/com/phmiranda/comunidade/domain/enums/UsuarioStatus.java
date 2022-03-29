@@ -10,5 +10,5 @@ package br.com.phmiranda.comunidade.domain.enums;
 
 public enum UsuarioStatus {
     ATIVADO,
-    DESATIVADO
+    DESATIVADO,
 }
