@@ -37,6 +37,16 @@ public class Resposta {
     @Column(name = "situacao", nullable = false, length = 100)
     private Boolean situacao = Boolean.FALSE;
 
+    public Resposta() {
+
+    }
+
+    public Resposta(String descricao, Usuario usuario, Duvida duvida) {
+        this.descricao = descricao;
+        this.usuario = usuario;
+        this.duvida = duvida;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;

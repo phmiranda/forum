@@ -8,12 +8,16 @@
 
 package br.com.phmiranda.comunidade.service;
 
+import br.com.phmiranda.comunidade.domain.dto.request.UsuarioRequestDto;
 import br.com.phmiranda.comunidade.domain.entity.Usuario;
 import br.com.phmiranda.comunidade.domain.dto.response.UsuarioResponseDto;
 import br.com.phmiranda.comunidade.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @Service
@@ -27,9 +31,15 @@ public class UsuarioService {
         return UsuarioResponseDto.converter(usuarios);
     }
 
+    public ResponseEntity<UsuarioResponseDto> salvar(UsuarioRequestDto usuarioRequestDto, UriComponentsBuilder uriComponentsBuilder) {
+        Usuario usuario = usuarioRequestDto.converter();
+        usuario.setSenha("$2a$04$PeKdrLpYfR3Z8A2qZ5ekneDIRp8x4ORiz/oKu9Ird2uX.RbaFHj4u");
+        usuarioRepository.save(usuario);
+        URI uri = uriComponentsBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
+        return ResponseEntity.created(uri).body(new UsuarioResponseDto(usuario));
+    }
+
     public List<UsuarioResponseDto> pesquisarPorId(Long id) {
-        //List<Usuario> usuarios = usuarioRepository.findById(id);
-        //return UsuarioResponseDto.converter(usuarios);
         return null;
     }
 
@@ -49,8 +59,6 @@ public class UsuarioService {
     }
 
     public List<UsuarioResponseDto> pesquisarPorStatus(String usuarioStatus) {
-        //List<Usuario> usuarios = usuarioRepository.findByStatus(usuarioStatus);
-        //return UsuarioResponseDto.converter(usuarios);
         return null;
     }
 }

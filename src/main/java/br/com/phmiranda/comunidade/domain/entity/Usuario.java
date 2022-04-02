@@ -37,6 +37,17 @@ public class Usuario  {
     @Column(name = "situacao", nullable = false, length = 10)
     private UsuarioStatus situacao = UsuarioStatus.DESATIVADO;
 
+    public Usuario() {
+
+    }
+
+    public Usuario(String nome, String email, String documento, String senha) {
+        this.nome = nome;
+        this.email = email;
+        this.documento = documento;
+        this.senha = senha;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;

@@ -57,6 +57,16 @@ public class Duvida {
         return result;
     }
 
+    public Duvida() {
+
+    }
+
+    public Duvida(String titulo, String descricao, Curso curso) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.curso = curso;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

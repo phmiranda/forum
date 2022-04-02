@@ -8,12 +8,15 @@
 
 package br.com.phmiranda.comunidade.controller;
 
+import br.com.phmiranda.comunidade.domain.dto.request.DuvidaRequestDto;
+import br.com.phmiranda.comunidade.domain.dto.request.UsuarioRequestDto;
 import br.com.phmiranda.comunidade.domain.dto.response.DuvidaResponseDto;
+import br.com.phmiranda.comunidade.domain.entity.Duvida;
 import br.com.phmiranda.comunidade.service.DuvidaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -27,6 +30,11 @@ public class DuvidaController {
     @GetMapping
     public List<DuvidaResponseDto> index() {
         return duvidaService.index();
+    }
+
+    @PostMapping
+    public ResponseEntity<DuvidaResponseDto> cadastrar(@RequestBody DuvidaRequestDto duvidaRequestDto, UriComponentsBuilder uriComponentsBuilder) {
+        return duvidaService.salvar(duvidaRequestDto, uriComponentsBuilder);
     }
 
     @GetMapping("/filtro/{id}")

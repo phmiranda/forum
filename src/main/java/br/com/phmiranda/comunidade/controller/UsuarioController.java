@@ -8,12 +8,13 @@
 
 package br.com.phmiranda.comunidade.controller;
 
+import br.com.phmiranda.comunidade.domain.dto.request.UsuarioRequestDto;
 import br.com.phmiranda.comunidade.domain.dto.response.UsuarioResponseDto;
 import br.com.phmiranda.comunidade.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -27,6 +28,11 @@ public class UsuarioController {
     @GetMapping
     public List<UsuarioResponseDto> index() {
         return usuarioService.index();
+    }
+
+    @PostMapping
+    public ResponseEntity<UsuarioResponseDto> cadastrar(@RequestBody UsuarioRequestDto usuarioRequestDto, UriComponentsBuilder uriComponentsBuilder) {
+        return usuarioService.salvar(usuarioRequestDto, uriComponentsBuilder);
     }
 
     @GetMapping("/filtro/{id}")
