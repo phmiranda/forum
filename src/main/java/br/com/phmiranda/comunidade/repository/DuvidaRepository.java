@@ -16,7 +16,6 @@ import java.util.List;
 
 @Repository
 public interface DuvidaRepository extends JpaRepository<Duvida, Long> {
-    List<Duvida> findByTitulo(String titulo);
-    List<Duvida> findByCursoNome(String curso);
-    Duvida findByTituloDuvida(String tituloDuvida);
+    Duvida findByTitulo(String titulo);
+    List<Duvida> findByCursoNome(String titulo);
 }
