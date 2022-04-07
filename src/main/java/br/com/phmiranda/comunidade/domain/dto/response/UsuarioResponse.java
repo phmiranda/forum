@@ -13,13 +13,13 @@ import br.com.phmiranda.comunidade.domain.entity.Usuario;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UsuarioResponseDto {
+public class UsuarioResponse {
     private Long id;
     private String nome;
     private String email;
     private String documento;
 
-    public UsuarioResponseDto(Usuario usuario) {
+    public UsuarioResponse(Usuario usuario) {
         this.id = usuario.getId();
         this.nome = usuario.getNome();
         this.email = usuario.getEmail();
@@ -42,7 +42,7 @@ public class UsuarioResponseDto {
         return documento;
     }
 
-    public static List<UsuarioResponseDto> converter(List<Usuario> usuarios) {
-        return usuarios.stream().map(UsuarioResponseDto::new).collect(Collectors.toList());
+    public static List<UsuarioResponse> converter(List<Usuario> usuarios) {
+        return usuarios.stream().map(UsuarioResponse::new).collect(Collectors.toList());
     }
 }

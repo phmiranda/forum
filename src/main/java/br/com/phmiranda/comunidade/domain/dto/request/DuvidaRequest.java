@@ -12,9 +12,21 @@ import br.com.phmiranda.comunidade.domain.entity.Curso;
 import br.com.phmiranda.comunidade.domain.entity.Duvida;
 import br.com.phmiranda.comunidade.repository.CursoRepository;
 
-public class DuvidaRequestDto {
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+public class DuvidaRequest {
+    @NotNull
+    @NotEmpty
     private String titulo;
+
+    @NotNull
+    @NotEmpty
     private String descricao;
+
+    @NotNull
+    @NotEmpty
     private String nomeCurso;
 
     public String getTitulo() {

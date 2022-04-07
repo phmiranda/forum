@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class Resposta {
 
     @Id
-    @Column(name = "id", nullable = false, length = 100)
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

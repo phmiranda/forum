@@ -10,8 +10,16 @@ package br.com.phmiranda.comunidade.domain.dto.request;
 
 import br.com.phmiranda.comunidade.domain.entity.Curso;
 
-public class CursoRequestDto {
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+public class CursoRequest {
+    @NotNull
+    @NotEmpty
     private String nome;
+
+    @NotNull
+    @NotEmpty
     private String categoria;
 
     public String getNome() {

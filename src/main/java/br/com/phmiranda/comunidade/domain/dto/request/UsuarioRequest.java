@@ -9,11 +9,29 @@
 package br.com.phmiranda.comunidade.domain.dto.request;
 
 import br.com.phmiranda.comunidade.domain.entity.Usuario;
+import org.hibernate.validator.constraints.br.CPF;
 
-public class UsuarioRequestDto {
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+public class UsuarioRequest {
+    @NotNull
+    @NotEmpty
     private String nome;
+
+    @Email
+    @NotNull
+    @NotEmpty
     private String email;
+
+    @CPF
+    @NotNull
+    @NotEmpty
     private String documento;
+
+    @NotNull
+    @NotEmpty
     private String senha;
 
     public String getNome() {

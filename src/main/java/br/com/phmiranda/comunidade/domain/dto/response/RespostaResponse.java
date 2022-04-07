@@ -10,16 +10,23 @@ package br.com.phmiranda.comunidade.domain.dto.response;
 
 import br.com.phmiranda.comunidade.domain.entity.Resposta;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RespostaResponseDto {
+public class RespostaResponse {
     private Long id;
     private String descricao;
+    private LocalDateTime dataCriacao;
+    private String usuario;
+    private String duvida;
 
-    public RespostaResponseDto(Resposta resposta) {
+    public RespostaResponse(Resposta resposta) {
         this.id = resposta.getId();
         this.descricao = resposta.getDescricao();
+        this.dataCriacao = resposta.getDataCriacao();
+        this.usuario = resposta.getUsuario().getNome();
+        this.duvida = resposta.getDuvida().getTitulo();
     }
 
     public Long getId() {
@@ -30,7 +37,19 @@ public class RespostaResponseDto {
         return descricao;
     }
 
-    public static List<RespostaResponseDto> converter(List<Resposta> respostas) {
-        return respostas.stream().map(RespostaResponseDto::new).collect(Collectors.toList());
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public String getDuvida() {
+        return duvida;
+    }
+
+    public static List<RespostaResponse> converter(List<Resposta> respostas) {
+        return respostas.stream().map(RespostaResponse::new).collect(Collectors.toList());
     }
 }

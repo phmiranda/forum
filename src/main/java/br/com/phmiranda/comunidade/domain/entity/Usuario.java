@@ -35,7 +35,7 @@ public class Usuario  {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "situacao", nullable = false, length = 10)
-    private UsuarioStatus situacao = UsuarioStatus.DESATIVADO;
+    private UsuarioStatus situacao = UsuarioStatus.INATIVO;
 
     public Usuario() {
 
