@@ -14,13 +14,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DuvidaResponseDto {
+public class DuvidaResponse {
     private Long id;
     private String titulo;
     private String descricao;
     private LocalDateTime dataCriacao;
 
-    public DuvidaResponseDto(Duvida duvida) {
+    public DuvidaResponse(Duvida duvida) {
         this.id = duvida.getId();
         this.titulo = duvida.getTitulo();
         this.descricao = duvida.getDescricao();
@@ -43,7 +43,7 @@ public class DuvidaResponseDto {
         return dataCriacao;
     }
 
-    public static List<DuvidaResponseDto> converter(List<Duvida> duvidas) {
-        return duvidas.stream().map(DuvidaResponseDto::new).collect(Collectors.toList());
+    public static List<DuvidaResponse> converter(List<Duvida> duvidas) {
+        return duvidas.stream().map(DuvidaResponse::new).collect(Collectors.toList());
     }
 }

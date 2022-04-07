@@ -8,12 +8,16 @@
 
 package br.com.phmiranda.comunidade.service;
 
+import br.com.phmiranda.comunidade.domain.dto.request.CursoRequest;
 import br.com.phmiranda.comunidade.domain.entity.Curso;
-import br.com.phmiranda.comunidade.domain.dto.response.CursoResponseDto;
+import br.com.phmiranda.comunidade.domain.dto.response.CursoResponse;
 import br.com.phmiranda.comunidade.repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @Service
@@ -23,26 +27,24 @@ public class CursoService {
     @Autowired
     CursoRepository cursoRepository;
 
-    public List<CursoResponseDto> index() {
+    public List<CursoResponse> index() {
         List<Curso> cursos = cursoRepository.findAll();
-        return CursoResponseDto.converter(cursos);
+        return CursoResponse.converter(cursos);
     }
 
-    public List<CursoResponseDto> pesquisarPorId(Long id) {
-        //List<Curso> cursos = cursoRepository.findById(id);
-        //return CursoResponseDto.converter(cursos);
+    public ResponseEntity<CursoResponse> salvar(CursoRequest cursoRequest, UriComponentsBuilder uriComponentsBuilder) {
+        Curso curso = cursoRequest.converter();
+        cursoRepository.save(curso);
+        URI uri = uriComponentsBuilder.path("/cursos/{id}").buildAndExpand(curso.getId()).toUri();
+        return ResponseEntity.created(uri).body(new CursoResponse(curso));
+    }
+
+    public List<CursoResponse> pesquisarPorId(Long id) {
         return null;
     }
 
-    public List<CursoResponseDto> pesquisarPorNome(String nome) {
-        List<Curso> cursos = cursoRepository.findByNome(nome);
-        return CursoResponseDto.converter(cursos);
-    }
-
-    public List<CursoResponseDto> pesquisarPorCategoria(String categoria) {
+    public List<CursoResponse> pesquisarPorCategoria(String categoria) {
         List<Curso> cursos = cursoRepository.findByCategoria(categoria);
-        return CursoResponseDto.converter(cursos);
+        return CursoResponse.converter(cursos);
     }
-
-
 }

@@ -8,12 +8,16 @@
 
 package br.com.phmiranda.comunidade.controller;
 
-import br.com.phmiranda.comunidade.domain.dto.response.CursoResponseDto;
+import br.com.phmiranda.comunidade.domain.dto.request.CursoRequest;
+import br.com.phmiranda.comunidade.domain.dto.response.CursoResponse;
 import br.com.phmiranda.comunidade.service.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,22 +28,23 @@ public class CursoController {
     CursoService cursoService;
 
     @GetMapping
-    public List<CursoResponseDto> index() {
+    public List<CursoResponse> index() {
         return  cursoService.index();
     }
 
+    @PostMapping
+    @Transactional
+    public ResponseEntity<CursoResponse> cadastrar(@RequestBody @Valid CursoRequest cursoRequest, UriComponentsBuilder uriComponentsBuilder) {
+        return cursoService.salvar(cursoRequest, uriComponentsBuilder);
+    }
+
     @GetMapping("/filtro/{id}")
-    public List<CursoResponseDto> pesquisarPorId(Long id) {
+    public List<CursoResponse> pesquisarPorId(Long id) {
         return cursoService.pesquisarPorId(id);
     }
 
-    @GetMapping("/filtro/nome")
-    public List<CursoResponseDto> pesquisarPorNome(String nome) {
-        return cursoService.pesquisarPorNome(nome);
-    }
-
     @GetMapping("/filtro/categoria")
-    public List<CursoResponseDto> pesquisarPorCategoria(String categoria) {
+    public List<CursoResponse> pesquisarPorCategoria(String categoria) {
         return cursoService.pesquisarPorCategoria(categoria);
     }
 }

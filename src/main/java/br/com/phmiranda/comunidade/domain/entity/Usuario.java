@@ -35,7 +35,18 @@ public class Usuario  {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "situacao", nullable = false, length = 10)
-    private UsuarioStatus situacao = UsuarioStatus.DESATIVADO;
+    private UsuarioStatus situacao = UsuarioStatus.INATIVO;
+
+    public Usuario() {
+
+    }
+
+    public Usuario(String nome, String email, String documento, String senha) {
+        this.nome = nome;
+        this.email = email;
+        this.documento = documento;
+        this.senha = senha;
+    }
 
     @Override
     public int hashCode() {

@@ -4,7 +4,7 @@
 '  '--'\ ' '-' ' |  |  |  | '  ''  ' |  ||  | |  | \ `-' | \ '-'  | \ `-' | \   --.   |  | |  | |  | '  ''  ' |  |    \ '-'  |
  `-----'  `---'  `--`--`--'  `----'  `--''--' `--'  `---'   `--`--'  `---'   `----'   `--' `--' `--'  `----'  `--'     `--`--'
 
-${application.title}
-${application.version}
+Projeto: ${application.title}
+Versão LTS: ${application.version}
 
 Powered by Spring Boot ${spring-boot.version}

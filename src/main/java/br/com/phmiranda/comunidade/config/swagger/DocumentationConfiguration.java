@@ -6,7 +6,7 @@
  * Date: 26/03/2022
  */
 
-package br.com.phmiranda.comunidade.config;
+package br.com.phmiranda.comunidade.config.swagger;
 
 import org.springframework.context.annotation.Configuration;
 

@@ -13,12 +13,12 @@ import br.com.phmiranda.comunidade.domain.entity.Curso;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CursoResponseDto {
+public class CursoResponse {
     private Long id;
     private String nome;
     private String categoria;
 
-    public CursoResponseDto(Curso curso) {
+    public CursoResponse(Curso curso) {
         this.id = curso.getId();
         this.nome = curso.getNome();
         this.categoria = curso.getCategoria();
@@ -36,7 +36,7 @@ public class CursoResponseDto {
         return categoria;
     }
 
-    public static List<CursoResponseDto> converter(List<Curso> cursos) {
-        return cursos.stream().map(CursoResponseDto::new).collect(Collectors.toList());
+    public static List<CursoResponse> converter(List<Curso> cursos) {
+        return cursos.stream().map(CursoResponse::new).collect(Collectors.toList());
     }
 }

@@ -20,7 +20,7 @@ import java.util.List;
 public class Duvida {
 
     @Id
-    @Column(name = "id", nullable = false, length = 100)
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -55,6 +55,16 @@ public class Duvida {
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
+    }
+
+    public Duvida() {
+
+    }
+
+    public Duvida(String titulo, String descricao, Curso curso) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.curso = curso;
     }
 
     @Override

@@ -8,13 +8,16 @@
 
 package br.com.phmiranda.comunidade.controller;
 
-import br.com.phmiranda.comunidade.domain.dto.response.DuvidaResponseDto;
+import br.com.phmiranda.comunidade.domain.dto.request.DuvidaRequest;
+import br.com.phmiranda.comunidade.domain.dto.response.DuvidaResponse;
 import br.com.phmiranda.comunidade.service.DuvidaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,22 +28,18 @@ public class DuvidaController {
     DuvidaService duvidaService;
 
     @GetMapping
-    public List<DuvidaResponseDto> index() {
+    public List<DuvidaResponse> index() {
         return duvidaService.index();
+    }
+
+    @PostMapping
+    @Transactional
+    public ResponseEntity<DuvidaResponse> cadastrar(@RequestBody @Valid DuvidaRequest duvidaRequest, UriComponentsBuilder uriComponentsBuilder) {
+        return duvidaService.salvar(duvidaRequest, uriComponentsBuilder);
     }
 
     @GetMapping("/filtro/{id}")
     public void pesquisarPorId() {
 
-    }
-
-    @GetMapping("/filtro/titulo")
-    public List<DuvidaResponseDto> pesquisarPorTitulo(String titulo) {
-        return duvidaService.pesquisarPorTitulo(titulo);
-    }
-
-    @GetMapping("/filtro/curso")
-    public List<DuvidaResponseDto> pesquisarPorCursoVinculado(String curso) {
-        return duvidaService.pesquisarPorCursoVinculado(curso);
     }
 }
