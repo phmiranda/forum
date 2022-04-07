@@ -11,14 +11,15 @@ package br.com.phmiranda.comunidade.domain.dto.request;
 import br.com.phmiranda.comunidade.domain.entity.Curso;
 import br.com.phmiranda.comunidade.domain.entity.Duvida;
 import br.com.phmiranda.comunidade.repository.CursoRepository;
+import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class DuvidaRequest {
     @NotNull
     @NotEmpty
+    @Length(min = 1, max = 100)
     private String titulo;
 
     @NotNull
@@ -27,6 +28,7 @@ public class DuvidaRequest {
 
     @NotNull
     @NotEmpty
+    @Length(min = 1, max = 100)
     private String nomeCurso;
 
     public String getTitulo() {
