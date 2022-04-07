@@ -42,7 +42,7 @@ public class DuvidaRequestDto {
     }
 
     public Duvida converter(CursoRepository cursoRepository) {
-        Curso curso = cursoRepository.findByNomeCurso(nomeCurso);
+        Curso curso = cursoRepository.findByNome(nomeCurso);
         return new Duvida(titulo, descricao, curso);
     }
 }
