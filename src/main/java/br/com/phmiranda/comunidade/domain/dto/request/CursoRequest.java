@@ -9,6 +9,7 @@
 package br.com.phmiranda.comunidade.domain.dto.request;
 
 import br.com.phmiranda.comunidade.domain.entity.Curso;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -16,10 +17,12 @@ import javax.validation.constraints.NotNull;
 public class CursoRequest {
     @NotNull
     @NotEmpty
+    @Length(min = 1, max = 100)
     private String nome;
 
     @NotNull
     @NotEmpty
+    @Length(min = 1, max = 50)
     private String categoria;
 
     public String getNome() {

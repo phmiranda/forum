@@ -13,6 +13,7 @@ import br.com.phmiranda.comunidade.domain.entity.Resposta;
 import br.com.phmiranda.comunidade.domain.entity.Usuario;
 import br.com.phmiranda.comunidade.repository.DuvidaRepository;
 import br.com.phmiranda.comunidade.repository.UsuarioRepository;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -24,10 +25,12 @@ public class RespostaRequest {
 
     @NotNull
     @NotEmpty
+    @Length(min = 1, max = 250)
     private String nomeUsuario;
 
     @NotNull
     @NotEmpty
+    @Length(min = 1, max = 100)
     private String duvidaTitulo;
 
     public String getDescricao() {
