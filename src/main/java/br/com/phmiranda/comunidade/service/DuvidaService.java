@@ -8,10 +8,9 @@
 
 package br.com.phmiranda.comunidade.service;
 
-import br.com.phmiranda.comunidade.domain.dto.request.DuvidaRequestDto;
-import br.com.phmiranda.comunidade.domain.dto.request.UsuarioRequestDto;
+import br.com.phmiranda.comunidade.domain.dto.request.DuvidaRequest;
 import br.com.phmiranda.comunidade.domain.entity.Duvida;
-import br.com.phmiranda.comunidade.domain.dto.response.DuvidaResponseDto;
+import br.com.phmiranda.comunidade.domain.dto.response.DuvidaResponse;
 import br.com.phmiranda.comunidade.repository.CursoRepository;
 import br.com.phmiranda.comunidade.repository.DuvidaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,29 +30,19 @@ public class DuvidaService {
     @Autowired
     CursoRepository cursoRepository;
 
-    public List<DuvidaResponseDto> index() {
+    public List<DuvidaResponse> index() {
         List<Duvida> duvidas = duvidaRepository.findAll();
-        return DuvidaResponseDto.converter(duvidas);
+        return DuvidaResponse.converter(duvidas);
     }
 
-    public ResponseEntity<DuvidaResponseDto> salvar(DuvidaRequestDto duvidaRequestDto, UriComponentsBuilder uriComponentsBuilder) {
-        Duvida duvida = duvidaRequestDto.converter(cursoRepository);
+    public ResponseEntity<DuvidaResponse> salvar(DuvidaRequest duvidaRequest, UriComponentsBuilder uriComponentsBuilder) {
+        Duvida duvida = duvidaRequest.converter(cursoRepository);
         duvidaRepository.save(duvida);
         URI uri = uriComponentsBuilder.path("/duvidas/{id}").buildAndExpand(duvida.getId()).toUri();
-        return ResponseEntity.created(uri).body(new DuvidaResponseDto(duvida));
+        return ResponseEntity.created(uri).body(new DuvidaResponse(duvida));
     }
 
     public void pesquisarPorId() {
 
-    }
-
-    public List<DuvidaResponseDto> pesquisarPorTitulo(String titulo) {
-        List<Duvida> duvidas = duvidaRepository.findByTitulo(titulo);
-        return DuvidaResponseDto.converter(duvidas);
-    }
-
-    public List<DuvidaResponseDto> pesquisarPorCursoVinculado(String curso) {
-        List<Duvida> duvidas = duvidaRepository.findByCursoNome(curso);
-        return DuvidaResponseDto.converter(duvidas);
     }
 }
