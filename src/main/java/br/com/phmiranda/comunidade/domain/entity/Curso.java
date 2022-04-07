@@ -22,7 +22,7 @@ public class Curso {
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
-    @Column(name = "categoria", nullable = false, length = 100)
+    @Column(name = "categoria", nullable = false, length = 50)
     private String categoria;
 
 
