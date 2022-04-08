@@ -38,8 +38,8 @@ public class CursoController {
         return cursoService.salvar(cursoRequest, uriComponentsBuilder);
     }
 
-    @GetMapping("/filtro/{id}")
-    public List<CursoResponse> pesquisarPorId(Long id) {
+    @GetMapping("/{id}")
+    public CursoResponse detalhar(@PathVariable Long id) {
         return cursoService.pesquisarPorId(id);
     }
 

@@ -37,4 +37,9 @@ public class UsuarioController {
     public ResponseEntity<UsuarioResponse> cadastrar(@RequestBody @Valid UsuarioRequest usuarioRequest, UriComponentsBuilder uriComponentsBuilder) {
         return usuarioService.salvar(usuarioRequest, uriComponentsBuilder);
     }
+
+    @GetMapping("/{id}")
+    public void detalhar(@PathVariable Long id) {
+
+    }
 }

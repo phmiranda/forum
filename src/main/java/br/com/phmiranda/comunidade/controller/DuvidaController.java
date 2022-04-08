@@ -9,6 +9,7 @@
 package br.com.phmiranda.comunidade.controller;
 
 import br.com.phmiranda.comunidade.domain.dto.request.DuvidaRequest;
+import br.com.phmiranda.comunidade.domain.dto.response.DuvidaDetalheResponse;
 import br.com.phmiranda.comunidade.domain.dto.response.DuvidaResponse;
 import br.com.phmiranda.comunidade.service.DuvidaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,8 @@ public class DuvidaController {
         return duvidaService.salvar(duvidaRequest, uriComponentsBuilder);
     }
 
-    @GetMapping("/filtro/{id}")
-    public void pesquisarPorId() {
-
+    @GetMapping("/{id}")
+    public DuvidaDetalheResponse detalhar(@PathVariable Long id) {
+        return duvidaService.pesquisarPorId(id);
     }
 }

@@ -37,4 +37,9 @@ public class RespostaController {
     public ResponseEntity<RespostaResponse> cadastrar(@RequestBody @Valid RespostaRequest respostaRequest, UriComponentsBuilder uriComponentsBuilder) {
         return respostaService.salvar(respostaRequest, uriComponentsBuilder);
     }
+
+    @GetMapping("/{id}")
+    public void detalhar(@PathVariable Long id) {
+
+    }
 }
