@@ -9,6 +9,7 @@
 package br.com.phmiranda.comunidade.service;
 
 import br.com.phmiranda.comunidade.domain.dto.request.DuvidaRequest;
+import br.com.phmiranda.comunidade.domain.dto.response.DuvidaDetalheResponse;
 import br.com.phmiranda.comunidade.domain.entity.Duvida;
 import br.com.phmiranda.comunidade.domain.dto.response.DuvidaResponse;
 import br.com.phmiranda.comunidade.repository.CursoRepository;
@@ -42,7 +43,8 @@ public class DuvidaService {
         return ResponseEntity.created(uri).body(new DuvidaResponse(duvida));
     }
 
-    public void pesquisarPorId() {
-
+    public DuvidaDetalheResponse pesquisarPorId(Long id) {
+        Duvida duvida = duvidaRepository.getOne(id);
+        return new DuvidaDetalheResponse(duvida);
     }
 }
