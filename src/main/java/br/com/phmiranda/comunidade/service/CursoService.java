@@ -39,8 +39,9 @@ public class CursoService {
         return ResponseEntity.created(uri).body(new CursoResponse(curso));
     }
 
-    public List<CursoResponse> pesquisarPorId(Long id) {
-        return null;
+    public CursoResponse pesquisarPorId(Long id) {
+        Curso curso = cursoRepository.getOne(id);
+        return new CursoResponse(curso);
     }
 
     public List<CursoResponse> pesquisarPorCategoria(String categoria) {
