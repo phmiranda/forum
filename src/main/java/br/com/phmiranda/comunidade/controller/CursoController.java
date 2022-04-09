@@ -28,7 +28,7 @@ public class CursoController {
     CursoService cursoService;
 
     @GetMapping
-    public List<CursoResponse> index() {
+    public List<CursoResponse> listar() {
         return  cursoService.index();
     }
 
@@ -38,12 +38,24 @@ public class CursoController {
         return cursoService.salvar(cursoRequest, uriComponentsBuilder);
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        return cursoService.deletar(id);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<CursoResponse> atualizar(@PathVariable Long id, @RequestBody @Valid CursoRequest cursoRequest) {
+        return cursoService.atualizar(id, cursoRequest);
+    }
+
     @GetMapping("/{id}")
-    public CursoResponse detalhar(@PathVariable Long id) {
+    public ResponseEntity<CursoResponse> detalhar(@PathVariable Long id) {
         return cursoService.pesquisarPorId(id);
     }
 
-    @GetMapping("/filtro/categoria")
+    @GetMapping("/categorias")
     public List<CursoResponse> pesquisarPorCategoria(String categoria) {
         return cursoService.pesquisarPorCategoria(categoria);
     }
