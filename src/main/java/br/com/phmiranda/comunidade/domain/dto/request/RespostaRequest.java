@@ -21,6 +21,7 @@ import javax.validation.constraints.NotNull;
 public class RespostaRequest {
     @NotNull
     @NotEmpty
+    @Length(min = 1)
     private String descricao;
 
     @NotNull

@@ -9,6 +9,7 @@
 package br.com.phmiranda.comunidade.domain.dto.request;
 
 import br.com.phmiranda.comunidade.domain.entity.Curso;
+import br.com.phmiranda.comunidade.repository.CursoRepository;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
@@ -43,5 +44,12 @@ public class CursoRequest {
 
     public Curso converter() {
         return new Curso(nome, categoria);
+    }
+
+    public Curso atualizarEntidade(Long id, CursoRepository cursoRepository) {
+        Curso curso = cursoRepository.getOne(id);
+        curso.setNome(this.nome);
+        curso.setCategoria(this.categoria);
+        return curso;
     }
 }

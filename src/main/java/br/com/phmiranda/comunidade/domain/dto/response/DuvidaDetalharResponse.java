@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DuvidaDetalheResponse {
+public class DuvidaDetalharResponse {
     private Long id;
     private String titulo;
     private String descricao;
@@ -26,7 +26,7 @@ public class DuvidaDetalheResponse {
     private LocalDateTime dataCriacao;
     private List<RespostaResponse> respostas;
 
-    public DuvidaDetalheResponse(Duvida duvida) {
+    public DuvidaDetalharResponse(Duvida duvida) {
         this.id = duvida.getId();
         this.titulo = duvida.getTitulo();
         this.descricao = duvida.getDescricao();

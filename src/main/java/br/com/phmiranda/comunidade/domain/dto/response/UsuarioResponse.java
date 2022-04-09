@@ -9,6 +9,7 @@
 package br.com.phmiranda.comunidade.domain.dto.response;
 
 import br.com.phmiranda.comunidade.domain.entity.Usuario;
+import br.com.phmiranda.comunidade.domain.enums.UsuarioStatus;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,12 +19,14 @@ public class UsuarioResponse {
     private String nome;
     private String email;
     private String documento;
+    private UsuarioStatus usuarioStatus;
 
     public UsuarioResponse(Usuario usuario) {
         this.id = usuario.getId();
         this.nome = usuario.getNome();
         this.email = usuario.getEmail();
         this.documento = usuario.getDocumento();
+        this.usuarioStatus = usuario.getSituacao();
     }
 
     public Long getId() {
@@ -40,6 +43,10 @@ public class UsuarioResponse {
 
     public String getDocumento() {
         return documento;
+    }
+
+    public UsuarioStatus getUsuarioStatus() {
+        return usuarioStatus;
     }
 
     public static List<UsuarioResponse> converter(List<Usuario> usuarios) {
