@@ -9,6 +9,7 @@
 package br.com.phmiranda.comunidade.controller;
 
 import br.com.phmiranda.comunidade.domain.dto.request.RespostaRequest;
+import br.com.phmiranda.comunidade.domain.dto.request.RespostaUpdateRequest;
 import br.com.phmiranda.comunidade.domain.dto.response.RespostaResponse;
 import br.com.phmiranda.comunidade.service.RespostaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class RespostaController {
     RespostaService respostaService;
 
     @GetMapping
-    public List<RespostaResponse> listarTudo() {
+    public List<RespostaResponse> listar() {
         return respostaService.index();
     }
 
@@ -38,8 +39,14 @@ public class RespostaController {
         return respostaService.salvar(respostaRequest, uriComponentsBuilder);
     }
 
-    @GetMapping("/{id}")
-    public void detalhar(@PathVariable Long id) {
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<RespostaResponse> atualizar(@PathVariable Long id, @RequestBody @Valid RespostaUpdateRequest respostaUpdateRequest) {
+        return respostaService.atualizar(id, respostaUpdateRequest);
+    }
 
+    @GetMapping("/{id}")
+    public RespostaResponse detalhar(@PathVariable Long id) {
+        return respostaService.pesquisarPorId(id);
     }
 }

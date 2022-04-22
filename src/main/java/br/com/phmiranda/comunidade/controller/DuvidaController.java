@@ -8,8 +8,9 @@
 
 package br.com.phmiranda.comunidade.controller;
 
+import br.com.phmiranda.comunidade.domain.dto.request.DuvidaUpdateRequest;
 import br.com.phmiranda.comunidade.domain.dto.request.DuvidaRequest;
-import br.com.phmiranda.comunidade.domain.dto.response.DuvidaDetalheResponse;
+import br.com.phmiranda.comunidade.domain.dto.response.DuvidaDetalharResponse;
 import br.com.phmiranda.comunidade.domain.dto.response.DuvidaResponse;
 import br.com.phmiranda.comunidade.service.DuvidaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class DuvidaController {
     DuvidaService duvidaService;
 
     @GetMapping
-    public List<DuvidaResponse> index() {
+    public List<DuvidaResponse> listar() {
         return duvidaService.index();
     }
 
@@ -39,8 +40,14 @@ public class DuvidaController {
         return duvidaService.salvar(duvidaRequest, uriComponentsBuilder);
     }
 
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DuvidaResponse> atualizar(@PathVariable Long id, @RequestBody @Valid DuvidaUpdateRequest duvidaUpdateRequest) {
+        return duvidaService.atualizar(id, duvidaUpdateRequest);
+    }
+
     @GetMapping("/{id}")
-    public DuvidaDetalheResponse detalhar(@PathVariable Long id) {
+    public DuvidaDetalharResponse detalhar(@PathVariable Long id) {
         return duvidaService.pesquisarPorId(id);
     }
 }

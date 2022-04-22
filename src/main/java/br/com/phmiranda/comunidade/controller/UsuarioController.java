@@ -8,6 +8,7 @@
 
 package br.com.phmiranda.comunidade.controller;
 
+import br.com.phmiranda.comunidade.domain.dto.request.UsuarioUpdateRequest;
 import br.com.phmiranda.comunidade.domain.dto.request.UsuarioRequest;
 import br.com.phmiranda.comunidade.domain.dto.response.UsuarioResponse;
 import br.com.phmiranda.comunidade.service.UsuarioService;
@@ -28,7 +29,7 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     @GetMapping
-    public List<UsuarioResponse> index() {
+    public List<UsuarioResponse> listar() {
         return usuarioService.index();
     }
 
@@ -38,8 +39,14 @@ public class UsuarioController {
         return usuarioService.salvar(usuarioRequest, uriComponentsBuilder);
     }
 
-    @GetMapping("/{id}")
-    public void detalhar(@PathVariable Long id) {
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<UsuarioResponse> atualizar(@PathVariable Long id, @RequestBody @Valid UsuarioUpdateRequest usuarioUpdateRequest) {
+        return usuarioService.atualizar(id, usuarioUpdateRequest);
+    }
 
+    @GetMapping("/{id}")
+    public UsuarioResponse detalhar(@PathVariable Long id) {
+        return usuarioService.pesquisarPorId(id);
     }
 }

@@ -8,6 +8,7 @@
 
 package br.com.phmiranda.comunidade.service;
 
+import br.com.phmiranda.comunidade.domain.dto.request.UsuarioUpdateRequest;
 import br.com.phmiranda.comunidade.domain.dto.request.UsuarioRequest;
 import br.com.phmiranda.comunidade.domain.dto.response.UsuarioResponse;
 import br.com.phmiranda.comunidade.domain.entity.Usuario;
@@ -36,5 +37,15 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
         URI uri = uriComponentsBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
         return ResponseEntity.created(uri).body(new UsuarioResponse(usuario));
+    }
+
+    public ResponseEntity<UsuarioResponse> atualizar(Long id, UsuarioUpdateRequest usuarioUpdateRequest) {
+        Usuario usuario = usuarioUpdateRequest.atualizarEntidade(id, usuarioRepository);
+        return ResponseEntity.ok(new UsuarioResponse(usuario));
+    }
+
+    public UsuarioResponse pesquisarPorId(Long id) {
+        Usuario usuario = usuarioRepository.getOne(id);
+        return new UsuarioResponse(usuario);
     }
 }

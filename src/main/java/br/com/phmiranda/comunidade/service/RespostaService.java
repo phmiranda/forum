@@ -9,6 +9,7 @@
 package br.com.phmiranda.comunidade.service;
 
 import br.com.phmiranda.comunidade.domain.dto.request.RespostaRequest;
+import br.com.phmiranda.comunidade.domain.dto.request.RespostaUpdateRequest;
 import br.com.phmiranda.comunidade.domain.dto.response.RespostaResponse;
 import br.com.phmiranda.comunidade.domain.entity.Resposta;
 import br.com.phmiranda.comunidade.repository.DuvidaRepository;
@@ -44,5 +45,15 @@ public class RespostaService {
         respostaRepository.save(resposta);
         URI uri = uriComponentsBuilder.path("/respostas/{id}").buildAndExpand(resposta.getId()).toUri();
         return ResponseEntity.created(uri).body(new RespostaResponse(resposta));
+    }
+
+    public ResponseEntity<RespostaResponse> atualizar(Long id, RespostaUpdateRequest respostaUpdateRequest) {
+        Resposta resposta = respostaUpdateRequest.atualizarEntidade(id, respostaRepository);
+        return ResponseEntity.ok(new RespostaResponse(resposta));
+    }
+
+    public RespostaResponse pesquisarPorId(Long id) {
+        Resposta resposta = respostaRepository.getOne(id);
+        return new RespostaResponse(resposta);
     }
 }

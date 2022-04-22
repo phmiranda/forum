@@ -8,8 +8,9 @@
 
 package br.com.phmiranda.comunidade.service;
 
+import br.com.phmiranda.comunidade.domain.dto.request.DuvidaUpdateRequest;
 import br.com.phmiranda.comunidade.domain.dto.request.DuvidaRequest;
-import br.com.phmiranda.comunidade.domain.dto.response.DuvidaDetalheResponse;
+import br.com.phmiranda.comunidade.domain.dto.response.DuvidaDetalharResponse;
 import br.com.phmiranda.comunidade.domain.entity.Duvida;
 import br.com.phmiranda.comunidade.domain.dto.response.DuvidaResponse;
 import br.com.phmiranda.comunidade.repository.CursoRepository;
@@ -43,8 +44,13 @@ public class DuvidaService {
         return ResponseEntity.created(uri).body(new DuvidaResponse(duvida));
     }
 
-    public DuvidaDetalheResponse pesquisarPorId(Long id) {
+    public ResponseEntity<DuvidaResponse> atualizar(Long id, DuvidaUpdateRequest duvidaUpdateRequest) {
+        Duvida duvida = duvidaUpdateRequest.atualizarEntidade(id, duvidaRepository);
+        return ResponseEntity.ok(new DuvidaResponse(duvida));
+    }
+
+    public DuvidaDetalharResponse pesquisarPorId(Long id) {
         Duvida duvida = duvidaRepository.getOne(id);
-        return new DuvidaDetalheResponse(duvida);
+        return new DuvidaDetalharResponse(duvida);
     }
 }
