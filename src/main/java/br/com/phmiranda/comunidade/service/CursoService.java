@@ -13,12 +13,15 @@ import br.com.phmiranda.comunidade.domain.entity.Curso;
 import br.com.phmiranda.comunidade.domain.dto.response.CursoResponse;
 import br.com.phmiranda.comunidade.repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,8 +31,9 @@ public class CursoService {
     @Autowired
     CursoRepository cursoRepository;
 
-    public List<CursoResponse> index() {
-        List<Curso> cursos = cursoRepository.findAll();
+    public Page<CursoResponse> index(Integer pagina, Integer elementos, String ordenacao) {
+        Pageable pageable = PageRequest.of(pagina, elementos, Sort.Direction.ASC, ordenacao);
+        Page<Curso> cursos = cursoRepository.findAll(pageable);
         return CursoResponse.converter(cursos);
     }
 
@@ -53,8 +57,9 @@ public class CursoService {
         return ResponseEntity.notFound().build();
     }
 
-    public List<CursoResponse> pesquisarPorCategoria(String categoria) {
-        List<Curso> cursos = cursoRepository.findByCategoria(categoria);
+    public Page<CursoResponse> pesquisarPorCategoria(Integer pagina, Integer elementos, String ordenacao, String categoria) {
+        Pageable pageable = PageRequest.of(pagina, elementos, Sort.Direction.ASC, ordenacao);
+        Page<Curso> cursos = cursoRepository.findByCategoria(pageable, categoria);
         return CursoResponse.converter(cursos);
     }
 

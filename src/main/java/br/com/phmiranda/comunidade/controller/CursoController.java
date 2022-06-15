@@ -12,13 +12,13 @@ import br.com.phmiranda.comunidade.domain.dto.request.CursoRequest;
 import br.com.phmiranda.comunidade.domain.dto.response.CursoResponse;
 import br.com.phmiranda.comunidade.service.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/cursos")
@@ -28,8 +28,8 @@ public class CursoController {
     CursoService cursoService;
 
     @GetMapping
-    public List<CursoResponse> listar() {
-        return  cursoService.index();
+    public Page<CursoResponse> listar(@RequestParam Integer pagina, @RequestParam Integer elementos, @RequestParam(required = false) String ordenacao) {
+        return  cursoService.index(pagina, elementos, ordenacao);
     }
 
     @Transactional
@@ -55,8 +55,8 @@ public class CursoController {
         return cursoService.deletar(id);
     }
 
-    @GetMapping("/categorias")
-    public List<CursoResponse> pesquisarPorCategoria(String categoria) {
-        return cursoService.pesquisarPorCategoria(categoria);
+    @GetMapping("/filtro/categoria")
+    public Page<CursoResponse> pesquisarPorCategoria(@RequestParam Integer pagina, @RequestParam Integer elementos, @RequestParam(required = false) String ordenacao, @RequestParam String categoria) {
+        return cursoService.pesquisarPorCategoria(pagina, elementos, ordenacao, categoria);
     }
 }
