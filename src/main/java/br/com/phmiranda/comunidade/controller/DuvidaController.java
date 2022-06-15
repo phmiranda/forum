@@ -34,14 +34,15 @@ public class DuvidaController {
         return duvidaService.index();
     }
 
-    @PostMapping
     @Transactional
+    @PostMapping
+
     public ResponseEntity<DuvidaResponse> cadastrar(@RequestBody @Valid DuvidaRequest duvidaRequest, UriComponentsBuilder uriComponentsBuilder) {
         return duvidaService.salvar(duvidaRequest, uriComponentsBuilder);
     }
 
-    @PutMapping("/{id}")
     @Transactional
+    @PutMapping("/{id}")
     public ResponseEntity<DuvidaResponse> atualizar(@PathVariable Long id, @RequestBody @Valid DuvidaUpdateRequest duvidaUpdateRequest) {
         return duvidaService.atualizar(id, duvidaUpdateRequest);
     }
@@ -49,5 +50,10 @@ public class DuvidaController {
     @GetMapping("/{id}")
     public DuvidaDetalharResponse detalhar(@PathVariable Long id) {
         return duvidaService.pesquisarPorId(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        return duvidaService.deletar(id);
     }
 }

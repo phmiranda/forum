@@ -33,14 +33,15 @@ public class UsuarioController {
         return usuarioService.index();
     }
 
-    @PostMapping
     @Transactional
+    @PostMapping
     public ResponseEntity<UsuarioResponse> cadastrar(@RequestBody @Valid UsuarioRequest usuarioRequest, UriComponentsBuilder uriComponentsBuilder) {
         return usuarioService.salvar(usuarioRequest, uriComponentsBuilder);
     }
 
-    @PutMapping("/{id}")
     @Transactional
+    @PutMapping("/{id}")
+
     public ResponseEntity<UsuarioResponse> atualizar(@PathVariable Long id, @RequestBody @Valid UsuarioUpdateRequest usuarioUpdateRequest) {
         return usuarioService.atualizar(id, usuarioUpdateRequest);
     }
@@ -48,5 +49,10 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public UsuarioResponse detalhar(@PathVariable Long id) {
         return usuarioService.pesquisarPorId(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        return usuarioService.deletar(id);
     }
 }

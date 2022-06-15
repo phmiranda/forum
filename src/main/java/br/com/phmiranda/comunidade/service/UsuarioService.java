@@ -20,6 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -47,5 +48,14 @@ public class UsuarioService {
     public UsuarioResponse pesquisarPorId(Long id) {
         Usuario usuario = usuarioRepository.getOne(id);
         return new UsuarioResponse(usuario);
+    }
+
+    public ResponseEntity<?> deletar(Long id) {
+        Optional<Usuario> optional = usuarioRepository.findById(id);
+        if (optional.isPresent()){
+            usuarioRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }

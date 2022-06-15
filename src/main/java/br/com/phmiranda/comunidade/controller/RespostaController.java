@@ -33,14 +33,14 @@ public class RespostaController {
         return respostaService.index();
     }
 
-    @PostMapping
     @Transactional
+    @PostMapping
     public ResponseEntity<RespostaResponse> cadastrar(@RequestBody @Valid RespostaRequest respostaRequest, UriComponentsBuilder uriComponentsBuilder) {
         return respostaService.salvar(respostaRequest, uriComponentsBuilder);
     }
 
-    @PutMapping("/{id}")
     @Transactional
+    @PutMapping("/{id}")
     public ResponseEntity<RespostaResponse> atualizar(@PathVariable Long id, @RequestBody @Valid RespostaUpdateRequest respostaUpdateRequest) {
         return respostaService.atualizar(id, respostaUpdateRequest);
     }
@@ -48,5 +48,10 @@ public class RespostaController {
     @GetMapping("/{id}")
     public RespostaResponse detalhar(@PathVariable Long id) {
         return respostaService.pesquisarPorId(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        return respostaService.deletar(id);
     }
 }

@@ -22,6 +22,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DuvidaService {
@@ -52,5 +53,14 @@ public class DuvidaService {
     public DuvidaDetalharResponse pesquisarPorId(Long id) {
         Duvida duvida = duvidaRepository.getOne(id);
         return new DuvidaDetalharResponse(duvida);
+    }
+
+    public ResponseEntity<?> deletar(Long id) {
+        Optional<Duvida> optional = duvidaRepository.findById(id);
+        if (optional.isPresent()) {
+            duvidaRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
