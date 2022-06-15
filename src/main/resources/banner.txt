@@ -5,6 +5,6 @@
  `-----'  `---'  `--`--`--'  `----'  `--''--' `--'  `---'   `--`--'  `---'   `----'   `--' `--' `--'  `----'  `--'     `--`--'
 
 Projeto: ${application.title}
-Versão LTS: ${application.version}
+Versao LTS: ${application.version}
 
 Powered by Spring Boot ${spring-boot.version}
