@@ -8,7 +8,9 @@
 
 package br.com.phmiranda.comunidade.controller;
 
+import br.com.phmiranda.comunidade.domain.dto.request.DuvidaUpdateRequest;
 import br.com.phmiranda.comunidade.domain.dto.request.DuvidaRequest;
+import br.com.phmiranda.comunidade.domain.dto.response.DuvidaDetalharResponse;
 import br.com.phmiranda.comunidade.domain.dto.response.DuvidaResponse;
 import br.com.phmiranda.comunidade.service.DuvidaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,18 +30,30 @@ public class DuvidaController {
     DuvidaService duvidaService;
 
     @GetMapping
-    public List<DuvidaResponse> index() {
+    public List<DuvidaResponse> listar() {
         return duvidaService.index();
     }
 
-    @PostMapping
     @Transactional
+    @PostMapping
+
     public ResponseEntity<DuvidaResponse> cadastrar(@RequestBody @Valid DuvidaRequest duvidaRequest, UriComponentsBuilder uriComponentsBuilder) {
         return duvidaService.salvar(duvidaRequest, uriComponentsBuilder);
     }
 
-    @GetMapping("/filtro/{id}")
-    public void pesquisarPorId() {
+    @Transactional
+    @PutMapping("/{id}")
+    public ResponseEntity<DuvidaResponse> atualizar(@PathVariable Long id, @RequestBody @Valid DuvidaUpdateRequest duvidaUpdateRequest) {
+        return duvidaService.atualizar(id, duvidaUpdateRequest);
+    }
 
+    @GetMapping("/{id}")
+    public DuvidaDetalharResponse detalhar(@PathVariable Long id) {
+        return duvidaService.pesquisarPorId(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        return duvidaService.deletar(id);
     }
 }

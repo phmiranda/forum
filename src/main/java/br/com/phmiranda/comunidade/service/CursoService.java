@@ -19,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CursoService {
@@ -39,12 +40,30 @@ public class CursoService {
         return ResponseEntity.created(uri).body(new CursoResponse(curso));
     }
 
-    public List<CursoResponse> pesquisarPorId(Long id) {
-        return null;
+    public ResponseEntity<CursoResponse> atualizar(Long id, CursoRequest cursoRequest) {
+        Curso curso = cursoRequest.atualizarEntidade(id, cursoRepository);
+        return ResponseEntity.ok(new CursoResponse(curso));
+    }
+
+    public ResponseEntity<CursoResponse> pesquisarPorId(Long id) {
+        Optional<Curso> optional = cursoRepository.findById(id);
+        if (optional.isPresent()) {
+            return ResponseEntity.ok(new CursoResponse(optional.get())) ;
+        }
+        return ResponseEntity.notFound().build();
     }
 
     public List<CursoResponse> pesquisarPorCategoria(String categoria) {
         List<Curso> cursos = cursoRepository.findByCategoria(categoria);
         return CursoResponse.converter(cursos);
+    }
+
+    public ResponseEntity<?> deletar(Long id) {
+        Optional<Curso> optional = cursoRepository.findById(id);
+        if (optional.isPresent()) {
+            cursoRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }

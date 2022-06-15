@@ -8,6 +8,7 @@
 
 package br.com.phmiranda.comunidade.controller;
 
+import br.com.phmiranda.comunidade.domain.dto.request.UsuarioUpdateRequest;
 import br.com.phmiranda.comunidade.domain.dto.request.UsuarioRequest;
 import br.com.phmiranda.comunidade.domain.dto.response.UsuarioResponse;
 import br.com.phmiranda.comunidade.service.UsuarioService;
@@ -28,13 +29,30 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     @GetMapping
-    public List<UsuarioResponse> index() {
+    public List<UsuarioResponse> listar() {
         return usuarioService.index();
     }
 
-    @PostMapping
     @Transactional
+    @PostMapping
     public ResponseEntity<UsuarioResponse> cadastrar(@RequestBody @Valid UsuarioRequest usuarioRequest, UriComponentsBuilder uriComponentsBuilder) {
         return usuarioService.salvar(usuarioRequest, uriComponentsBuilder);
+    }
+
+    @Transactional
+    @PutMapping("/{id}")
+
+    public ResponseEntity<UsuarioResponse> atualizar(@PathVariable Long id, @RequestBody @Valid UsuarioUpdateRequest usuarioUpdateRequest) {
+        return usuarioService.atualizar(id, usuarioUpdateRequest);
+    }
+
+    @GetMapping("/{id}")
+    public UsuarioResponse detalhar(@PathVariable Long id) {
+        return usuarioService.pesquisarPorId(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        return usuarioService.deletar(id);
     }
 }

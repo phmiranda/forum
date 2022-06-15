@@ -8,7 +8,9 @@
 
 package br.com.phmiranda.comunidade.service;
 
+import br.com.phmiranda.comunidade.domain.dto.request.DuvidaUpdateRequest;
 import br.com.phmiranda.comunidade.domain.dto.request.DuvidaRequest;
+import br.com.phmiranda.comunidade.domain.dto.response.DuvidaDetalharResponse;
 import br.com.phmiranda.comunidade.domain.entity.Duvida;
 import br.com.phmiranda.comunidade.domain.dto.response.DuvidaResponse;
 import br.com.phmiranda.comunidade.repository.CursoRepository;
@@ -20,6 +22,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DuvidaService {
@@ -42,7 +45,22 @@ public class DuvidaService {
         return ResponseEntity.created(uri).body(new DuvidaResponse(duvida));
     }
 
-    public void pesquisarPorId() {
+    public ResponseEntity<DuvidaResponse> atualizar(Long id, DuvidaUpdateRequest duvidaUpdateRequest) {
+        Duvida duvida = duvidaUpdateRequest.atualizarEntidade(id, duvidaRepository);
+        return ResponseEntity.ok(new DuvidaResponse(duvida));
+    }
 
+    public DuvidaDetalharResponse pesquisarPorId(Long id) {
+        Duvida duvida = duvidaRepository.getOne(id);
+        return new DuvidaDetalharResponse(duvida);
+    }
+
+    public ResponseEntity<?> deletar(Long id) {
+        Optional<Duvida> optional = duvidaRepository.findById(id);
+        if (optional.isPresent()) {
+            duvidaRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }

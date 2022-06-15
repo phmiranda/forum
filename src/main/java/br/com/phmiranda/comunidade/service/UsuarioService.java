@@ -8,6 +8,7 @@
 
 package br.com.phmiranda.comunidade.service;
 
+import br.com.phmiranda.comunidade.domain.dto.request.UsuarioUpdateRequest;
 import br.com.phmiranda.comunidade.domain.dto.request.UsuarioRequest;
 import br.com.phmiranda.comunidade.domain.dto.response.UsuarioResponse;
 import br.com.phmiranda.comunidade.domain.entity.Usuario;
@@ -19,6 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -36,5 +38,24 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
         URI uri = uriComponentsBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
         return ResponseEntity.created(uri).body(new UsuarioResponse(usuario));
+    }
+
+    public ResponseEntity<UsuarioResponse> atualizar(Long id, UsuarioUpdateRequest usuarioUpdateRequest) {
+        Usuario usuario = usuarioUpdateRequest.atualizarEntidade(id, usuarioRepository);
+        return ResponseEntity.ok(new UsuarioResponse(usuario));
+    }
+
+    public UsuarioResponse pesquisarPorId(Long id) {
+        Usuario usuario = usuarioRepository.getOne(id);
+        return new UsuarioResponse(usuario);
+    }
+
+    public ResponseEntity<?> deletar(Long id) {
+        Optional<Usuario> optional = usuarioRepository.findById(id);
+        if (optional.isPresent()){
+            usuarioRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
