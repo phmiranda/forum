@@ -13,6 +13,9 @@ import br.com.phmiranda.comunidade.domain.dto.response.CursoResponse;
 import br.com.phmiranda.comunidade.service.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -28,8 +31,8 @@ public class CursoController {
     CursoService cursoService;
 
     @GetMapping
-    public Page<CursoResponse> listar(@RequestParam Integer pagina, @RequestParam Integer elementos, @RequestParam(required = false) String ordenacao) {
-        return  cursoService.index(pagina, elementos, ordenacao);
+    public Page<CursoResponse> listar(@PageableDefault(page = 0, size = 10, sort = "nome", direction = Sort.Direction.DESC) Pageable paginacao) {
+        return  cursoService.index(paginacao);
     }
 
     @Transactional
@@ -56,7 +59,7 @@ public class CursoController {
     }
 
     @GetMapping("/filtro/categoria")
-    public Page<CursoResponse> pesquisarPorCategoria(@RequestParam Integer pagina, @RequestParam Integer elementos, @RequestParam(required = false) String ordenacao, @RequestParam String categoria) {
-        return cursoService.pesquisarPorCategoria(pagina, elementos, ordenacao, categoria);
+    public Page<CursoResponse> pesquisarPorCategoria(@PageableDefault(page = 0, size = 10, sort = "nome", direction = Sort.Direction.DESC) Pageable paginacao, @RequestParam(required = false) String categoria) {
+        return cursoService.pesquisarPorCategoria(paginacao, categoria);
     }
 }

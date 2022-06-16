@@ -31,9 +31,8 @@ public class CursoService {
     @Autowired
     CursoRepository cursoRepository;
 
-    public Page<CursoResponse> index(Integer pagina, Integer elementos, String ordenacao) {
-        Pageable pageable = PageRequest.of(pagina, elementos, Sort.Direction.ASC, ordenacao);
-        Page<Curso> cursos = cursoRepository.findAll(pageable);
+    public Page<CursoResponse> index(Pageable paginacao) {
+        Page<Curso> cursos = cursoRepository.findAll(paginacao);
         return CursoResponse.converter(cursos);
     }
 
@@ -57,9 +56,8 @@ public class CursoService {
         return ResponseEntity.notFound().build();
     }
 
-    public Page<CursoResponse> pesquisarPorCategoria(Integer pagina, Integer elementos, String ordenacao, String categoria) {
-        Pageable pageable = PageRequest.of(pagina, elementos, Sort.Direction.ASC, ordenacao);
-        Page<Curso> cursos = cursoRepository.findByCategoria(pageable, categoria);
+    public Page<CursoResponse> pesquisarPorCategoria(Pageable paginacao, String categoria) {
+        Page<Curso> cursos = cursoRepository.findByCategoria(paginacao, categoria);
         return CursoResponse.converter(cursos);
     }
 
