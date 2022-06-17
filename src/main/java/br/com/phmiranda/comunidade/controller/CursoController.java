@@ -31,7 +31,7 @@ public class CursoController {
     CursoService cursoService;
 
     @GetMapping
-    public Page<CursoResponse> listar(@PageableDefault(page = 0, size = 10, sort = "nome", direction = Sort.Direction.DESC) Pageable paginacao) {
+    public Page<CursoResponse> listar(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable paginacao) {
         return  cursoService.index(paginacao);
     }
 
@@ -59,7 +59,7 @@ public class CursoController {
     }
 
     @GetMapping("/filtro/categoria")
-    public Page<CursoResponse> pesquisarPorCategoria(@PageableDefault(page = 0, size = 10, sort = "nome", direction = Sort.Direction.DESC) Pageable paginacao, @RequestParam(required = false) String categoria) {
+    public Page<CursoResponse> pesquisarPorCategoria(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable paginacao, @RequestParam(required = false) String categoria) {
         return cursoService.pesquisarPorCategoria(paginacao, categoria);
     }
 }

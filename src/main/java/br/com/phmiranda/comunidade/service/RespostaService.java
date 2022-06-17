@@ -16,6 +16,8 @@ import br.com.phmiranda.comunidade.repository.DuvidaRepository;
 import br.com.phmiranda.comunidade.repository.RespostaRepository;
 import br.com.phmiranda.comunidade.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -36,8 +38,8 @@ public class RespostaService {
     @Autowired
     DuvidaRepository duvidaRepository;
 
-    public List<RespostaResponse> index() {
-        List<Resposta> respostas = respostaRepository.findAll();
+    public Page<RespostaResponse> index(Pageable paginacao) {
+        Page<Resposta> respostas = respostaRepository.findAll(paginacao);
         return RespostaResponse.converter(respostas);
     }
 
