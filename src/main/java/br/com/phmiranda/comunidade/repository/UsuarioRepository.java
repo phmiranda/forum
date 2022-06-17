@@ -1,18 +1,18 @@
 /*
- * Author: Pedro
+ * Author: phmiranda
  * Project: comunidade
- * User Story: PGT-HU001
- * Description: CONSTRUÇÃO DO SERVIÇO DE CADASTRO DE USUÁRIOS.
- * Date: 05/05/2020
+ * Task Number: HU-XXX
+ * Description: N/A
+ * Date: 07/04/2022
  */
 
 package br.com.phmiranda.comunidade.repository;
 
-import br.com.phmiranda.comunidade.domain.Usuario;
+import br.com.phmiranda.comunidade.domain.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-
+    Usuario findByNome(String nome);
 }

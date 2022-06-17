@@ -1,74 +1,62 @@
 /*
- * Author: Pedro
+ * Author: phmiranda
  * Project: comunidade
- * User Story: HUXXX - TITLE OF USER HISTORY
- * Description: DESCRIPTION OF USER HISTORY
- * Date: 03/08/2021
+ * Task Number: HU-XXX
+ * Description: N/A
+ * Date: 07/04/2022
  */
 
 package br.com.phmiranda.comunidade.controller;
 
-import br.com.phmiranda.comunidade.domain.Usuario;
-import br.com.phmiranda.comunidade.domain.dto.UsuarioDto;
-import br.com.phmiranda.comunidade.domain.form.UsuarioFormDto;
-import br.com.phmiranda.comunidade.repository.UsuarioRepository;
+import br.com.phmiranda.comunidade.domain.dto.request.UsuarioUpdateRequest;
+import br.com.phmiranda.comunidade.domain.dto.request.UsuarioRequest;
+import br.com.phmiranda.comunidade.domain.dto.response.UsuarioResponse;
+import br.com.phmiranda.comunidade.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
     @Autowired
-    UsuarioRepository usuarioRepository;
+    UsuarioService usuarioService;
 
     @GetMapping
-    public Page<UsuarioDto> index(@PageableDefault(sort = "id", page = 0, size = 10, direction = Sort.Direction.ASC) Pageable paginacao) {
-        Page<Usuario> usuarios = usuarioRepository.findAll(paginacao);
-        return UsuarioDto.converter(usuarios);
+    public Page<UsuarioResponse> listar(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable paginacao) {
+        return usuarioService.index(paginacao);
     }
 
-    @PostMapping
     @Transactional
-    public ResponseEntity<UsuarioDto> cadastrar(@RequestBody @Valid UsuarioFormDto usuarioFormDto, UriComponentsBuilder uriComponentsBuilder) {
-        Usuario usuario = usuarioFormDto.converter();
-        // verifica a criptografia da senha de usuário e seta antes de persistir.
-        usuarioRepository.save(usuario);
-        URI uri = uriComponentsBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
-        return ResponseEntity.created(uri).body(new UsuarioDto(usuario));
+    @PostMapping
+    public ResponseEntity<UsuarioResponse> cadastrar(@RequestBody @Valid UsuarioRequest usuarioRequest, UriComponentsBuilder uriComponentsBuilder) {
+        return usuarioService.salvar(usuarioRequest, uriComponentsBuilder);
     }
 
-    public void deletar() {
+    @Transactional
+    @PutMapping("/{id}")
 
+    public ResponseEntity<UsuarioResponse> atualizar(@PathVariable Long id, @RequestBody @Valid UsuarioUpdateRequest usuarioUpdateRequest) {
+        return usuarioService.atualizar(id, usuarioUpdateRequest);
     }
 
-    public void atualizar(){
-
+    @GetMapping("/{id}")
+    public UsuarioResponse detalhar(@PathVariable Long id) {
+        return usuarioService.pesquisarPorId(id);
     }
 
-    public void pesquisarPorId(){
-
-    }
-
-    public void pesquisarPorNome(){
-
-    }
-
-    public void pesquisarPorEmail(){
-
-    }
-
-    public void pesquisarPorDocumento(){
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        return usuarioService.deletar(id);
     }
 }

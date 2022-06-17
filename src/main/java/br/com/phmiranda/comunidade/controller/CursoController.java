@@ -1,95 +1,65 @@
 /*
- * Author: Pedro
+ * Author: phmiranda
  * Project: comunidade
- * User Story: HUXXX - TITLE OF USER HISTORY
- * Description: DESCRIPTION OF USER HISTORY
- * Date: 03/08/2021
+ * Task Number: 73
+ * Description: Usando Spring Data
+ * Date: 26/03/2022
  */
 
 package br.com.phmiranda.comunidade.controller;
 
-import br.com.phmiranda.comunidade.domain.Curso;
-import br.com.phmiranda.comunidade.domain.Topico;
-import br.com.phmiranda.comunidade.domain.dto.CursoDetalharDto;
-import br.com.phmiranda.comunidade.domain.dto.CursoDto;
-import br.com.phmiranda.comunidade.domain.form.CursoAtualizarFormDto;
-import br.com.phmiranda.comunidade.domain.form.CursoFormDto;
-import br.com.phmiranda.comunidade.repository.CursoRepository;
+import br.com.phmiranda.comunidade.domain.dto.request.CursoRequest;
+import br.com.phmiranda.comunidade.domain.dto.response.CursoResponse;
+import br.com.phmiranda.comunidade.service.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.net.URI;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/cursos")
 public class CursoController {
 
     @Autowired
-    CursoRepository cursoRepository;
+    CursoService cursoService;
 
     @GetMapping
-    public Page<CursoDto> index(@PageableDefault(sort = "id", page = 0, size = 10, direction = Sort.Direction.ASC) Pageable paginacao) {
-        Page<Curso> cursos = cursoRepository.findAll(paginacao);
-        return CursoDto.converter(cursos);
+    public Page<CursoResponse> listar(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable paginacao) {
+        return  cursoService.index(paginacao);
     }
 
     @Transactional
     @PostMapping
-    public ResponseEntity<CursoDto> cadastrar(@RequestBody @Valid CursoFormDto cursoFormDto, UriComponentsBuilder uriComponentsBuilder) {
-        Curso curso = cursoFormDto.converter();
-        cursoRepository.save(curso);
-        URI uri = uriComponentsBuilder.path("/cursos/{id}").buildAndExpand(curso.getId()).toUri();
-        return ResponseEntity.created(uri).body(new CursoDto(curso));
-    }
-
-    @Transactional
-    @DeleteMapping("/{id}")
-    public  ResponseEntity<?> deletar(@PathVariable Long id) {
-        Optional<Curso> optionalCurso = cursoRepository.findById(id);
-        if (optionalCurso.isPresent()) {
-            cursoRepository.deleteById(id);
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<CursoResponse> cadastrar(@RequestBody @Valid CursoRequest cursoRequest, UriComponentsBuilder uriComponentsBuilder) {
+        return cursoService.salvar(cursoRequest, uriComponentsBuilder);
     }
 
     @Transactional
     @PutMapping("/{id}")
-    public ResponseEntity<CursoDto> atualizar(@PathVariable Long id, @RequestBody CursoAtualizarFormDto cursoAtualizarFormDto) {
-        Optional<Curso> optionalCurso = cursoRepository.findById(id);
-        if (optionalCurso.isPresent()) {
-            Curso curso = cursoAtualizarFormDto.atualizarRecurso(id, cursoRepository);
-            return ResponseEntity.ok(new CursoDto(curso));
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<CursoResponse> atualizar(@PathVariable Long id, @RequestBody @Valid CursoRequest cursoRequest) {
+        return cursoService.atualizar(id, cursoRequest);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CursoDetalharDto> pesquisarPorId(@PathVariable Long id) {
-        Optional<Curso> optionalCurso = cursoRepository.findById(id);
-        if (optionalCurso.isPresent()) {
-            return ResponseEntity.ok(new CursoDetalharDto(optionalCurso.get()));
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<CursoResponse> detalhar(@PathVariable Long id) {
+        return cursoService.pesquisarPorId(id);
     }
 
-    @GetMapping("/nome")
-    public Page<CursoDto> pesquisarPorNome(@RequestParam String nome) {
-        return null;
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        return cursoService.deletar(id);
     }
 
-    @GetMapping("/categoria")
-    public Page<CursoDto> pesquisarPorCategoria(@RequestParam String categoria) {
-        return null;
+    @GetMapping("/filtro/categoria")
+    public Page<CursoResponse> pesquisarPorCategoria(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable paginacao, @RequestParam(required = false) String categoria) {
+        return cursoService.pesquisarPorCategoria(paginacao, categoria);
     }
 }

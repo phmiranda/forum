@@ -1,9 +1,9 @@
 /*
- * Author: Pedro
+ * Author: phmiranda
  * Project: comunidade
- * User Story: PGT-HU001
- * Description: CONSTRUÇÃO DO SERVIÇO DE CADASTRO DE USUÁRIOS.
- * Date: 20/07/2021
+ * Task Number: 71
+ * Description: Introdução ao Spring Boot
+ * Date: 26/03/2022
  */
 
 package br.com.phmiranda.comunidade;
