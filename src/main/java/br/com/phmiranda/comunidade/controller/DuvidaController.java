@@ -14,6 +14,10 @@ import br.com.phmiranda.comunidade.domain.dto.response.DuvidaDetalharResponse;
 import br.com.phmiranda.comunidade.domain.dto.response.DuvidaResponse;
 import br.com.phmiranda.comunidade.service.DuvidaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -30,8 +34,8 @@ public class DuvidaController {
     DuvidaService duvidaService;
 
     @GetMapping
-    public List<DuvidaResponse> listar() {
-        return duvidaService.index();
+    public Page<DuvidaResponse> listar(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable paginacao) {
+        return duvidaService.index(paginacao);
     }
 
     @Transactional

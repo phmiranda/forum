@@ -10,6 +10,7 @@ package br.com.phmiranda.comunidade.domain.dto.response;
 
 import br.com.phmiranda.comunidade.domain.entity.Usuario;
 import br.com.phmiranda.comunidade.domain.enums.UsuarioStatus;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,7 +50,7 @@ public class UsuarioResponse {
         return usuarioStatus;
     }
 
-    public static List<UsuarioResponse> converter(List<Usuario> usuarios) {
-        return usuarios.stream().map(UsuarioResponse::new).collect(Collectors.toList());
+    public static Page<UsuarioResponse> converter(Page<Usuario> usuarios) {
+        return usuarios.map(UsuarioResponse::new);
     }
 }

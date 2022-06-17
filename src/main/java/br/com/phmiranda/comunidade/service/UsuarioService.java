@@ -14,6 +14,8 @@ import br.com.phmiranda.comunidade.domain.dto.response.UsuarioResponse;
 import br.com.phmiranda.comunidade.domain.entity.Usuario;
 import br.com.phmiranda.comunidade.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -28,8 +30,8 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    public List<UsuarioResponse> index() {
-        List<Usuario> usuarios = usuarioRepository.findAll();
+    public Page<UsuarioResponse> index(Pageable paginacao) {
+        Page<Usuario> usuarios = usuarioRepository.findAll(paginacao);
         return UsuarioResponse.converter(usuarios);
     }
 

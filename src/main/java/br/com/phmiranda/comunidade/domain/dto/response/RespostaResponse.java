@@ -9,6 +9,7 @@
 package br.com.phmiranda.comunidade.domain.dto.response;
 
 import br.com.phmiranda.comunidade.domain.entity.Resposta;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -49,7 +50,7 @@ public class RespostaResponse {
         return duvida;
     }
 
-    public static List<RespostaResponse> converter(List<Resposta> respostas) {
-        return respostas.stream().map(RespostaResponse::new).collect(Collectors.toList());
+    public static Page<RespostaResponse> converter(Page<Resposta> respostas) {
+        return respostas.map(RespostaResponse::new);
     }
 }

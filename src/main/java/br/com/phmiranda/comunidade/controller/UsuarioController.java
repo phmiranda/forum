@@ -13,6 +13,10 @@ import br.com.phmiranda.comunidade.domain.dto.request.UsuarioRequest;
 import br.com.phmiranda.comunidade.domain.dto.response.UsuarioResponse;
 import br.com.phmiranda.comunidade.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -29,8 +33,8 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     @GetMapping
-    public List<UsuarioResponse> listar() {
-        return usuarioService.index();
+    public Page<UsuarioResponse> listar(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable paginacao) {
+        return usuarioService.index(paginacao);
     }
 
     @Transactional
