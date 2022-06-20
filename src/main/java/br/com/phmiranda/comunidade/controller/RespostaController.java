@@ -54,6 +54,7 @@ public class RespostaController {
         return respostaService.pesquisarPorId(id);
     }
 
+    @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity<?> remover(@PathVariable Long id) {
         return respostaService.deletar(id);

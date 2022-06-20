@@ -56,6 +56,7 @@ public class DuvidaController {
         return duvidaService.pesquisarPorId(id);
     }
 
+    @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity<?> remover(@PathVariable Long id) {
         return duvidaService.deletar(id);
