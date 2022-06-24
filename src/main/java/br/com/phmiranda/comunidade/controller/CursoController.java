@@ -12,6 +12,7 @@ import br.com.phmiranda.comunidade.domain.dto.request.CursoRequest;
 import br.com.phmiranda.comunidade.domain.dto.response.CursoResponse;
 import br.com.phmiranda.comunidade.service.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -30,6 +31,7 @@ public class CursoController {
     @Autowired
     CursoService cursoService;
 
+    @Cacheable(value = "listaCursos")
     @GetMapping
     public Page<CursoResponse> listar(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable paginacao) {
         return  cursoService.index(paginacao);
