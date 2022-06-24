@@ -50,7 +50,7 @@ public class RespostaController {
     }
 
     @GetMapping("/{id}")
-    public RespostaResponse detalhar(@PathVariable Long id) {
+    public ResponseEntity<RespostaResponse> detalhar(@PathVariable Long id) {
         return respostaService.pesquisarPorId(id);
     }
 

@@ -47,9 +47,12 @@ public class UsuarioService {
         return ResponseEntity.ok(new UsuarioResponse(usuario));
     }
 
-    public UsuarioResponse pesquisarPorId(Long id) {
-        Usuario usuario = usuarioRepository.getOne(id);
-        return new UsuarioResponse(usuario);
+    public ResponseEntity<UsuarioResponse> pesquisarPorId(Long id) {
+        Optional<Usuario> optional = usuarioRepository.findById(id);
+        if(optional.isPresent()) {
+            return ResponseEntity.ok(new UsuarioResponse(optional.get()));
+        }
+        return ResponseEntity.notFound().build();
     }
 
     public ResponseEntity<?> deletar(Long id) {

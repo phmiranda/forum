@@ -52,9 +52,12 @@ public class DuvidaService {
         return ResponseEntity.ok(new DuvidaResponse(duvida));
     }
 
-    public DuvidaDetalharResponse pesquisarPorId(Long id) {
-        Duvida duvida = duvidaRepository.getOne(id);
-        return new DuvidaDetalharResponse(duvida);
+    public ResponseEntity<DuvidaDetalharResponse> pesquisarPorId(Long id) {
+        Optional<Duvida> optional = duvidaRepository.findById(id);
+        if (optional.isPresent()) {
+            return ResponseEntity.ok(new DuvidaDetalharResponse(optional.get()));
+        }
+        return ResponseEntity.notFound().build();
     }
 
     public ResponseEntity<?> deletar(Long id) {

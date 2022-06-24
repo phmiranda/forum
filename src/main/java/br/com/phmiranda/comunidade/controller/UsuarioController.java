@@ -51,7 +51,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public UsuarioResponse detalhar(@PathVariable Long id) {
+    public ResponseEntity<UsuarioResponse> detalhar(@PathVariable Long id) {
         return usuarioService.pesquisarPorId(id);
     }
 

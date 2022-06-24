@@ -52,7 +52,7 @@ public class DuvidaController {
     }
 
     @GetMapping("/{id}")
-    public DuvidaDetalharResponse detalhar(@PathVariable Long id) {
+    public ResponseEntity<DuvidaDetalharResponse> detalhar(@PathVariable Long id) {
         return duvidaService.pesquisarPorId(id);
     }
 
