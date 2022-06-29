@@ -13,6 +13,8 @@ import br.com.phmiranda.comunidade.domain.dto.request.RespostaUpdateRequest;
 import br.com.phmiranda.comunidade.domain.dto.response.RespostaResponse;
 import br.com.phmiranda.comunidade.service.RespostaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -33,18 +35,21 @@ public class RespostaController {
     RespostaService respostaService;
 
     @GetMapping
+    @Cacheable(value = "listaDeRespostas")
     public Page<RespostaResponse> listar(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable paginacao) {
         return respostaService.index(paginacao);
     }
 
-    @Transactional
     @PostMapping
+    @Transactional
+    @CacheEvict(value = "listaDeRespostas", allEntries = true)
     public ResponseEntity<RespostaResponse> cadastrar(@RequestBody @Valid RespostaRequest respostaRequest, UriComponentsBuilder uriComponentsBuilder) {
         return respostaService.salvar(respostaRequest, uriComponentsBuilder);
     }
 
     @Transactional
     @PutMapping("/{id}")
+    @CacheEvict(value = "listaDeRespostas", allEntries = true)
     public ResponseEntity<RespostaResponse> atualizar(@PathVariable Long id, @RequestBody @Valid RespostaUpdateRequest respostaUpdateRequest) {
         return respostaService.atualizar(id, respostaUpdateRequest);
     }
@@ -56,6 +61,7 @@ public class RespostaController {
 
     @Transactional
     @DeleteMapping("/{id}")
+    @CacheEvict(value = "listaDeRespostas", allEntries = true)
     public ResponseEntity<?> remover(@PathVariable Long id) {
         return respostaService.deletar(id);
     }
