@@ -55,9 +55,12 @@ public class RespostaService {
         return ResponseEntity.ok(new RespostaResponse(resposta));
     }
 
-    public RespostaResponse pesquisarPorId(Long id) {
-        Resposta resposta = respostaRepository.getOne(id);
-        return new RespostaResponse(resposta);
+    public ResponseEntity<RespostaResponse> pesquisarPorId(Long id) {
+        Optional<Resposta> optional = respostaRepository.findById(id);
+        if (optional.isPresent()) {
+            return ResponseEntity.ok(new RespostaResponse(optional.get()));
+        }
+        return ResponseEntity.notFound().build();
     }
 
     public ResponseEntity<?> deletar(Long id) {

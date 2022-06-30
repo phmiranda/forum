@@ -1,4 +1,4 @@
-INSERT INTO db_comunidade.usuarios (id, documento, email, nome, senha, situacao) VALUES (1, '00299090078', 'admin@email.com.br', 'Administrador', '$2a$04$ygKK8TiwMgUA64teTjLk0eA5QBTRQX/Xym54qzoCk6dbd.dt8Y0OK', 'INATIVO');
+INSERT INTO db_comunidade.usuarios (id, documento, email, nome, senha, situacao) VALUES (1, '00299090078', 'admin@email.com.br', 'Administrador', '$2a$04$ygKK8TiwMgUA64teTjLk0eA5QBTRQX/Xym54qzoCk6dbd.dt8Y0OK', 'ATIVO');
 INSERT INTO db_comunidade.usuarios (id, documento, email, nome, senha, situacao) VALUES (2, '08049993094', 'debora.silva@email.com.br', 'Débora Viana da Silva', '$2a$04$ygKK8TiwMgUA64teTjLk0eA5QBTRQX/Xym54qzoCk6dbd.dt8Y0OK', 'INATIVO');
 INSERT INTO db_comunidade.usuarios (id, documento, email, nome, senha, situacao) VALUES (3, '31071752006', 'alexandre.silva@email.com.br', 'Alexander Vasconcelos da Silva ', '$2a$04$ygKK8TiwMgUA64teTjLk0eA5QBTRQX/Xym54qzoCk6dbd.dt8Y0OK', 'INATIVO');
 INSERT INTO db_comunidade.usuarios (id, documento, email, nome, senha, situacao) VALUES (4, '49750603028', 'ticiane.esparteiro@email.com.br', 'Ticiane Guterres Esparteiro', '$2a$04$ygKK8TiwMgUA64teTjLk0eA5QBTRQX/Xym54qzoCk6dbd.dt8Y0OK', 'INATIVO');
