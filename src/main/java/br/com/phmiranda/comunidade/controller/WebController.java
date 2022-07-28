@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/olamundo")
+@RequestMapping("/")
 public class WebController {
 
-    @GetMapping
+    @GetMapping("/olamundo")
     public void olaMundo(String nome) {
         System.out.println("BEM VINDO AO CURSO DE SPRING BOOT: " + nome);
     }

@@ -8,7 +8,9 @@
 
 package br.com.phmiranda.comunidade.controller;
 
+import br.com.phmiranda.comunidade.domain.dto.request.UsuarioRequest;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController {
 
-    @PostMapping("/logar")
-    public void autenticar() {
-        System.out.println("AUTENTICANDO USUÁRIO: ");
+    @PostMapping("/basica")
+    public void autenticar(@RequestBody UsuarioRequest usuarioRequest) {
+        System.out.println("AUTENTICANDO USUÁRIO: " + usuarioRequest.getEmail());
     }
 
     @PostMapping("/deslogar")
@@ -27,12 +29,12 @@ public class AuthController {
     }
 
     @PostMapping("/oauth/google")
-    public void oAuthGoogle() {
-        System.out.println("AUTENTICANDO USUÁRIO NO GOOGLE OAUTH2: ");
+    public void oAuthGoogle(@RequestBody UsuarioRequest usuarioRequest) {
+        System.out.println("AUTENTICANDO USUÁRIO NO GOOGLE OAUTH2: " + usuarioRequest.getEmail());
     }
 
     @PostMapping("/oauth/facebook")
-    public void oAuthFacebook() {
-        System.out.println("AUTENTICANDO USUÁRIO NO FACEBOOK: ");
+    public void oAuthFacebook(@RequestBody UsuarioRequest usuarioRequest) {
+        System.out.println("AUTENTICANDO USUÁRIO NO FACEBOOK: " + usuarioRequest.getEmail());
     }
 }
