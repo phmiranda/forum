@@ -9,12 +9,17 @@
 package br.com.phmiranda.comunidade.domain.entity;
 
 import br.com.phmiranda.comunidade.domain.enums.UsuarioStatus;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuario  {
+public class Usuario implements UserDetails {
 
     @Id
     @Column(name = "id", nullable = false)
@@ -36,6 +41,10 @@ public class Usuario  {
     @Enumerated(EnumType.STRING)
     @Column(name = "situacao", nullable = false, length = 10)
     private UsuarioStatus situacao = UsuarioStatus.INATIVO;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "perfil_id", nullable = true)
+    private List<Perfil> perfis = new ArrayList<>();
 
     public Usuario() {
 
@@ -119,5 +128,40 @@ public class Usuario  {
 
     public void setSituacao(UsuarioStatus situacao) {
         this.situacao = situacao;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.perfis;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
