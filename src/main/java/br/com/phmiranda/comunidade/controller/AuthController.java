@@ -8,33 +8,26 @@
 
 package br.com.phmiranda.comunidade.controller;
 
-import br.com.phmiranda.comunidade.domain.dto.request.UsuarioRequest;
+import br.com.phmiranda.comunidade.domain.dto.request.AuthRequest;
+import br.com.phmiranda.comunidade.service.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
+    @Autowired
+    AuthService authService;
+
     @PostMapping("/basica")
-    public void autenticar(@RequestBody UsuarioRequest usuarioRequest) {
-        System.out.println("AUTENTICANDO USUÁRIO: " + usuarioRequest.getEmail());
-    }
-
-    @PostMapping("/deslogar")
-    public void deslogar() {
-        System.out.println("DESLOGANDO USUÁRIO: ");
-    }
-
-    @PostMapping("/oauth/google")
-    public void oAuthGoogle(@RequestBody UsuarioRequest usuarioRequest) {
-        System.out.println("AUTENTICANDO USUÁRIO NO GOOGLE OAUTH2: " + usuarioRequest.getEmail());
-    }
-
-    @PostMapping("/oauth/facebook")
-    public void oAuthFacebook(@RequestBody UsuarioRequest usuarioRequest) {
-        System.out.println("AUTENTICANDO USUÁRIO NO FACEBOOK: " + usuarioRequest.getEmail());
+    public ResponseEntity<?> autenticacaoBasica(@RequestBody @Valid AuthRequest authRequest) {
+        return authService.autenticar(authRequest);
     }
 }
