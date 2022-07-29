@@ -28,10 +28,8 @@ import java.util.Optional;
 public class AuthService implements UserDetailsService {
     @Autowired
     AuthenticationManager authenticationManager;
-
     @Autowired
     private AuthTokenService authTokenService;
-
     @Autowired
     UsuarioRepository usuarioRepository;
 
