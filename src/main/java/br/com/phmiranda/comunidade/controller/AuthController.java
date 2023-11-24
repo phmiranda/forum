@@ -28,6 +28,8 @@ public class AuthController {
 
     @PostMapping("/basica")
     public ResponseEntity<?> autenticacaoBasica(@RequestBody @Valid AuthRequest authRequest) {
+        System.out.println(authRequest.getEmail());
+        System.out.println(authRequest.getSenha());
         return authService.autenticar(authRequest);
     }
 }
